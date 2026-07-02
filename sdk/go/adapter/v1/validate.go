@@ -63,11 +63,23 @@ func ValidateDescriptor(desc *AdapterDescriptor) error {
 		if capability.GetId() == "" {
 			return fmt.Errorf("adapter %q contains capability without id", desc.AdapterId)
 		}
+		if capability.GetKind() == "" {
+			return fmt.Errorf("adapter %q capability %q requires kind", desc.AdapterId, capability.GetId())
+		}
+		if len(capability.GetActions()) == 0 && len(capability.GetRuntimeActions()) == 0 {
+			return fmt.Errorf("adapter %q capability %q requires actions or runtime actions", desc.AdapterId, capability.GetId())
+		}
 	}
 	for _, privilege := range desc.Privileges {
 		if privilege.GetId() == "" {
 			return fmt.Errorf("adapter %q contains privilege without id", desc.AdapterId)
 		}
+	}
+	if len(desc.Capabilities) > 0 && len(desc.ContextRequirements) == 0 {
+		return fmt.Errorf("adapter %q declares capabilities without context requirements", desc.AdapterId)
+	}
+	if declaresRuntimeAction(desc.Capabilities) && len(desc.Privileges) == 0 {
+		return fmt.Errorf("adapter %q declares runtime actions without privilege descriptors", desc.AdapterId)
 	}
 	return nil
 }
@@ -75,6 +87,15 @@ func ValidateDescriptor(desc *AdapterDescriptor) error {
 func hasFacet(facets []string, required string) bool {
 	for _, facet := range facets {
 		if facet == required {
+			return true
+		}
+	}
+	return false
+}
+
+func declaresRuntimeAction(capabilities []*CapabilityDescriptor) bool {
+	for _, capability := range capabilities {
+		if len(capability.GetRuntimeActions()) > 0 {
 			return true
 		}
 	}

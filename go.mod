@@ -1,6 +1,8 @@
 module github.com/kernloom/kernloom-protocol
 
-go 1.26.4
+go 1.26
+
+toolchain go1.26.4
 
 require (
 	github.com/bufbuild/protocompile v0.14.1
