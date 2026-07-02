@@ -109,6 +109,16 @@ func ImplementedFacets(desc *AdapterDescriptor) []string {
 
 func validateFacets(desc *AdapterDescriptor) (map[string]string, error) {
 	status := map[string]string{}
+	facetSet := map[string]struct{}{}
+	for _, facet := range desc.Facets {
+		if facet == "" {
+			return nil, fmt.Errorf("adapter %q contains empty facet name", desc.AdapterId)
+		}
+		if _, exists := facetSet[facet]; exists {
+			return nil, fmt.Errorf("adapter %q declares duplicate facet %q", desc.AdapterId, facet)
+		}
+		facetSet[facet] = struct{}{}
+	}
 	if len(desc.FacetDescriptors) == 0 {
 		for _, facet := range desc.Facets {
 			status[facet] = FacetStatusImplemented
@@ -128,20 +138,16 @@ func validateFacets(desc *AdapterDescriptor) (map[string]string, error) {
 			return nil, fmt.Errorf("adapter %q declares duplicate facet %q", desc.AdapterId, facet.GetName())
 		}
 		status[facet.GetName()] = facet.GetStatus()
-		if !hasFacet(desc.Facets, facet.GetName()) {
+		if _, exists := facetSet[facet.GetName()]; !exists {
 			return nil, fmt.Errorf("adapter %q facet descriptor %q is missing from facets list", desc.AdapterId, facet.GetName())
 		}
 	}
-	return status, nil
-}
-
-func hasFacet(facets []string, required string) bool {
-	for _, facet := range facets {
-		if facet == required {
-			return true
+	for facet := range facetSet {
+		if _, exists := status[facet]; !exists {
+			return nil, fmt.Errorf("adapter %q facet %q is missing a facet descriptor", desc.AdapterId, facet)
 		}
 	}
-	return false
+	return status, nil
 }
 
 func declaresRuntimeAction(capabilities []*CapabilityDescriptor) bool {

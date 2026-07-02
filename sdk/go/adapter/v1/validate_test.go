@@ -77,6 +77,32 @@ func TestValidateDescriptorRejectsPlannedHealthFacet(t *testing.T) {
 	}
 }
 
+func TestValidateDescriptorRejectsFacetWithoutDescriptor(t *testing.T) {
+	desc := baseDescriptor()
+	desc.Facets = append(desc.Facets, FacetPlanConfig)
+
+	err := ValidateDescriptor(desc)
+	if err == nil {
+		t.Fatal("expected facet without descriptor to be rejected")
+	}
+	if !strings.Contains(err.Error(), "missing a facet descriptor") {
+		t.Fatalf("expected missing descriptor error, got %v", err)
+	}
+}
+
+func TestValidateDescriptorRejectsDescriptorWithoutFacet(t *testing.T) {
+	desc := baseDescriptor()
+	desc.FacetDescriptors = append(desc.FacetDescriptors, &FacetDescriptor{Name: FacetPlanConfig, Status: FacetStatusPlanned})
+
+	err := ValidateDescriptor(desc)
+	if err == nil {
+		t.Fatal("expected descriptor without facet to be rejected")
+	}
+	if !strings.Contains(err.Error(), "missing from facets list") {
+		t.Fatalf("expected missing facet list error, got %v", err)
+	}
+}
+
 func baseDescriptor() *AdapterDescriptor {
 	return &AdapterDescriptor{
 		AdapterId:       "test.adapter",
