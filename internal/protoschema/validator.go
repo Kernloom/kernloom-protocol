@@ -24,6 +24,7 @@ func ValidateAdapterV1(path string) error {
 		"rpc Describe(DescribeRequest) returns (DescribeResponse);",
 		"rpc Health(HealthRequest) returns (HealthResponse);",
 		"message AdapterDescriptor",
+		"message FacetDescriptor",
 		"message CapabilityDescriptor",
 		"message ContextRequirementDescriptor",
 		"message PrivilegeDescriptor",

@@ -35,6 +35,11 @@ const (
 	HealthUnknown    = "unknown"
 )
 
+const (
+	FacetStatusImplemented = "implemented"
+	FacetStatusPlanned     = "planned"
+)
+
 type MinimalAdapter interface {
 	Describe(context.Context) (*AdapterDescriptor, error)
 	Health(context.Context) (*HealthResponse, error)
@@ -53,11 +58,15 @@ func ValidateDescriptor(desc *AdapterDescriptor) error {
 	if desc.ProtocolVersion != ProtocolVersion {
 		return fmt.Errorf("adapter protocol version %q does not match %q", desc.ProtocolVersion, ProtocolVersion)
 	}
-	if !hasFacet(desc.Facets, FacetDescribe) {
-		return fmt.Errorf("adapter %q must declare Describe facet", desc.AdapterId)
+	facetStatus, err := validateFacets(desc)
+	if err != nil {
+		return err
 	}
-	if !hasFacet(desc.Facets, FacetHealth) {
-		return fmt.Errorf("adapter %q must declare Health facet", desc.AdapterId)
+	if facetStatus[FacetDescribe] != FacetStatusImplemented {
+		return fmt.Errorf("adapter %q must declare Describe facet as implemented", desc.AdapterId)
+	}
+	if facetStatus[FacetHealth] != FacetStatusImplemented {
+		return fmt.Errorf("adapter %q must declare Health facet as implemented", desc.AdapterId)
 	}
 	for _, capability := range desc.Capabilities {
 		if capability.GetId() == "" {
@@ -82,6 +91,48 @@ func ValidateDescriptor(desc *AdapterDescriptor) error {
 		return fmt.Errorf("adapter %q declares runtime actions without privilege descriptors", desc.AdapterId)
 	}
 	return nil
+}
+
+func ImplementedFacets(desc *AdapterDescriptor) []string {
+	status, err := validateFacets(desc)
+	if err != nil {
+		return nil
+	}
+	var facets []string
+	for name, value := range status {
+		if value == FacetStatusImplemented {
+			facets = append(facets, name)
+		}
+	}
+	return facets
+}
+
+func validateFacets(desc *AdapterDescriptor) (map[string]string, error) {
+	status := map[string]string{}
+	if len(desc.FacetDescriptors) == 0 {
+		for _, facet := range desc.Facets {
+			status[facet] = FacetStatusImplemented
+		}
+		return status, nil
+	}
+	for _, facet := range desc.FacetDescriptors {
+		if facet.GetName() == "" {
+			return nil, fmt.Errorf("adapter %q contains facet without name", desc.AdapterId)
+		}
+		switch facet.GetStatus() {
+		case FacetStatusImplemented, FacetStatusPlanned:
+		default:
+			return nil, fmt.Errorf("adapter %q facet %q has unsupported status %q", desc.AdapterId, facet.GetName(), facet.GetStatus())
+		}
+		if _, exists := status[facet.GetName()]; exists {
+			return nil, fmt.Errorf("adapter %q declares duplicate facet %q", desc.AdapterId, facet.GetName())
+		}
+		status[facet.GetName()] = facet.GetStatus()
+		if !hasFacet(desc.Facets, facet.GetName()) {
+			return nil, fmt.Errorf("adapter %q facet descriptor %q is missing from facets list", desc.AdapterId, facet.GetName())
+		}
+	}
+	return status, nil
 }
 
 func hasFacet(facets []string, required string) bool {

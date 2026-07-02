@@ -113,6 +113,7 @@ type AdapterDescriptor struct {
 	ContextRequirements []*ContextRequirementDescriptor `protobuf:"bytes,5,rep,name=context_requirements,json=contextRequirements,proto3" json:"context_requirements,omitempty"`
 	Privileges          []*PrivilegeDescriptor          `protobuf:"bytes,6,rep,name=privileges,proto3" json:"privileges,omitempty"`
 	Facets              []string                        `protobuf:"bytes,7,rep,name=facets,proto3" json:"facets,omitempty"`
+	FacetDescriptors    []*FacetDescriptor              `protobuf:"bytes,8,rep,name=facet_descriptors,json=facetDescriptors,proto3" json:"facet_descriptors,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -196,6 +197,73 @@ func (x *AdapterDescriptor) GetFacets() []string {
 	return nil
 }
 
+func (x *AdapterDescriptor) GetFacetDescriptors() []*FacetDescriptor {
+	if x != nil {
+		return x.FacetDescriptors
+	}
+	return nil
+}
+
+type FacetDescriptor struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Status        string                 `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"`
+	Message       string                 `protobuf:"bytes,3,opt,name=message,proto3" json:"message,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *FacetDescriptor) Reset() {
+	*x = FacetDescriptor{}
+	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *FacetDescriptor) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*FacetDescriptor) ProtoMessage() {}
+
+func (x *FacetDescriptor) ProtoReflect() protoreflect.Message {
+	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use FacetDescriptor.ProtoReflect.Descriptor instead.
+func (*FacetDescriptor) Descriptor() ([]byte, []int) {
+	return file_kernloom_adapter_v1_adapter_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *FacetDescriptor) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *FacetDescriptor) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *FacetDescriptor) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
 type CapabilityDescriptor struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
 	Id             string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
@@ -209,7 +277,7 @@ type CapabilityDescriptor struct {
 
 func (x *CapabilityDescriptor) Reset() {
 	*x = CapabilityDescriptor{}
-	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[3]
+	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -221,7 +289,7 @@ func (x *CapabilityDescriptor) String() string {
 func (*CapabilityDescriptor) ProtoMessage() {}
 
 func (x *CapabilityDescriptor) ProtoReflect() protoreflect.Message {
-	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[3]
+	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -234,7 +302,7 @@ func (x *CapabilityDescriptor) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CapabilityDescriptor.ProtoReflect.Descriptor instead.
 func (*CapabilityDescriptor) Descriptor() ([]byte, []int) {
-	return file_kernloom_adapter_v1_adapter_proto_rawDescGZIP(), []int{3}
+	return file_kernloom_adapter_v1_adapter_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *CapabilityDescriptor) GetId() string {
@@ -284,7 +352,7 @@ type ContextRequirementDescriptor struct {
 
 func (x *ContextRequirementDescriptor) Reset() {
 	*x = ContextRequirementDescriptor{}
-	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[4]
+	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -296,7 +364,7 @@ func (x *ContextRequirementDescriptor) String() string {
 func (*ContextRequirementDescriptor) ProtoMessage() {}
 
 func (x *ContextRequirementDescriptor) ProtoReflect() protoreflect.Message {
-	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[4]
+	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -309,7 +377,7 @@ func (x *ContextRequirementDescriptor) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ContextRequirementDescriptor.ProtoReflect.Descriptor instead.
 func (*ContextRequirementDescriptor) Descriptor() ([]byte, []int) {
-	return file_kernloom_adapter_v1_adapter_proto_rawDescGZIP(), []int{4}
+	return file_kernloom_adapter_v1_adapter_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *ContextRequirementDescriptor) GetFact() string {
@@ -352,7 +420,7 @@ type PrivilegeDescriptor struct {
 
 func (x *PrivilegeDescriptor) Reset() {
 	*x = PrivilegeDescriptor{}
-	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[5]
+	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -364,7 +432,7 @@ func (x *PrivilegeDescriptor) String() string {
 func (*PrivilegeDescriptor) ProtoMessage() {}
 
 func (x *PrivilegeDescriptor) ProtoReflect() protoreflect.Message {
-	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[5]
+	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -377,7 +445,7 @@ func (x *PrivilegeDescriptor) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PrivilegeDescriptor.ProtoReflect.Descriptor instead.
 func (*PrivilegeDescriptor) Descriptor() ([]byte, []int) {
-	return file_kernloom_adapter_v1_adapter_proto_rawDescGZIP(), []int{5}
+	return file_kernloom_adapter_v1_adapter_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *PrivilegeDescriptor) GetId() string {
@@ -416,7 +484,7 @@ type HealthRequest struct {
 
 func (x *HealthRequest) Reset() {
 	*x = HealthRequest{}
-	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[6]
+	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -428,7 +496,7 @@ func (x *HealthRequest) String() string {
 func (*HealthRequest) ProtoMessage() {}
 
 func (x *HealthRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[6]
+	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -441,7 +509,7 @@ func (x *HealthRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HealthRequest.ProtoReflect.Descriptor instead.
 func (*HealthRequest) Descriptor() ([]byte, []int) {
-	return file_kernloom_adapter_v1_adapter_proto_rawDescGZIP(), []int{6}
+	return file_kernloom_adapter_v1_adapter_proto_rawDescGZIP(), []int{7}
 }
 
 type HealthResponse struct {
@@ -454,7 +522,7 @@ type HealthResponse struct {
 
 func (x *HealthResponse) Reset() {
 	*x = HealthResponse{}
-	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[7]
+	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -466,7 +534,7 @@ func (x *HealthResponse) String() string {
 func (*HealthResponse) ProtoMessage() {}
 
 func (x *HealthResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[7]
+	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -479,7 +547,7 @@ func (x *HealthResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HealthResponse.ProtoReflect.Descriptor instead.
 func (*HealthResponse) Descriptor() ([]byte, []int) {
-	return file_kernloom_adapter_v1_adapter_proto_rawDescGZIP(), []int{7}
+	return file_kernloom_adapter_v1_adapter_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *HealthResponse) GetStatus() string {
@@ -507,7 +575,7 @@ type PlanConfigRequest struct {
 
 func (x *PlanConfigRequest) Reset() {
 	*x = PlanConfigRequest{}
-	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[8]
+	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -519,7 +587,7 @@ func (x *PlanConfigRequest) String() string {
 func (*PlanConfigRequest) ProtoMessage() {}
 
 func (x *PlanConfigRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[8]
+	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -532,7 +600,7 @@ func (x *PlanConfigRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PlanConfigRequest.ProtoReflect.Descriptor instead.
 func (*PlanConfigRequest) Descriptor() ([]byte, []int) {
-	return file_kernloom_adapter_v1_adapter_proto_rawDescGZIP(), []int{8}
+	return file_kernloom_adapter_v1_adapter_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *PlanConfigRequest) GetPolicyId() string {
@@ -565,7 +633,7 @@ type PlanConfigResponse struct {
 
 func (x *PlanConfigResponse) Reset() {
 	*x = PlanConfigResponse{}
-	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[9]
+	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -577,7 +645,7 @@ func (x *PlanConfigResponse) String() string {
 func (*PlanConfigResponse) ProtoMessage() {}
 
 func (x *PlanConfigResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[9]
+	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -590,7 +658,7 @@ func (x *PlanConfigResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PlanConfigResponse.ProtoReflect.Descriptor instead.
 func (*PlanConfigResponse) Descriptor() ([]byte, []int) {
-	return file_kernloom_adapter_v1_adapter_proto_rawDescGZIP(), []int{9}
+	return file_kernloom_adapter_v1_adapter_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *PlanConfigResponse) GetProposedChanges() []*ConfigChange {
@@ -612,7 +680,7 @@ type ConfigChange struct {
 
 func (x *ConfigChange) Reset() {
 	*x = ConfigChange{}
-	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[10]
+	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -624,7 +692,7 @@ func (x *ConfigChange) String() string {
 func (*ConfigChange) ProtoMessage() {}
 
 func (x *ConfigChange) ProtoReflect() protoreflect.Message {
-	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[10]
+	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -637,7 +705,7 @@ func (x *ConfigChange) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ConfigChange.ProtoReflect.Descriptor instead.
 func (*ConfigChange) Descriptor() ([]byte, []int) {
-	return file_kernloom_adapter_v1_adapter_proto_rawDescGZIP(), []int{10}
+	return file_kernloom_adapter_v1_adapter_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *ConfigChange) GetId() string {
@@ -677,7 +745,7 @@ type ValidateConfigRequest struct {
 
 func (x *ValidateConfigRequest) Reset() {
 	*x = ValidateConfigRequest{}
-	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[11]
+	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -689,7 +757,7 @@ func (x *ValidateConfigRequest) String() string {
 func (*ValidateConfigRequest) ProtoMessage() {}
 
 func (x *ValidateConfigRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[11]
+	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -702,7 +770,7 @@ func (x *ValidateConfigRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ValidateConfigRequest.ProtoReflect.Descriptor instead.
 func (*ValidateConfigRequest) Descriptor() ([]byte, []int) {
-	return file_kernloom_adapter_v1_adapter_proto_rawDescGZIP(), []int{11}
+	return file_kernloom_adapter_v1_adapter_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *ValidateConfigRequest) GetProposedChanges() []*ConfigChange {
@@ -721,7 +789,7 @@ type ValidateConfigResponse struct {
 
 func (x *ValidateConfigResponse) Reset() {
 	*x = ValidateConfigResponse{}
-	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[12]
+	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -733,7 +801,7 @@ func (x *ValidateConfigResponse) String() string {
 func (*ValidateConfigResponse) ProtoMessage() {}
 
 func (x *ValidateConfigResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[12]
+	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -746,7 +814,7 @@ func (x *ValidateConfigResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ValidateConfigResponse.ProtoReflect.Descriptor instead.
 func (*ValidateConfigResponse) Descriptor() ([]byte, []int) {
-	return file_kernloom_adapter_v1_adapter_proto_rawDescGZIP(), []int{12}
+	return file_kernloom_adapter_v1_adapter_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *ValidateConfigResponse) GetFindings() []*Finding {
@@ -765,7 +833,7 @@ type ReadObservedStateRequest struct {
 
 func (x *ReadObservedStateRequest) Reset() {
 	*x = ReadObservedStateRequest{}
-	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[13]
+	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -777,7 +845,7 @@ func (x *ReadObservedStateRequest) String() string {
 func (*ReadObservedStateRequest) ProtoMessage() {}
 
 func (x *ReadObservedStateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[13]
+	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -790,7 +858,7 @@ func (x *ReadObservedStateRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReadObservedStateRequest.ProtoReflect.Descriptor instead.
 func (*ReadObservedStateRequest) Descriptor() ([]byte, []int) {
-	return file_kernloom_adapter_v1_adapter_proto_rawDescGZIP(), []int{13}
+	return file_kernloom_adapter_v1_adapter_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *ReadObservedStateRequest) GetScope() string {
@@ -809,7 +877,7 @@ type ReadObservedStateResponse struct {
 
 func (x *ReadObservedStateResponse) Reset() {
 	*x = ReadObservedStateResponse{}
-	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[14]
+	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -821,7 +889,7 @@ func (x *ReadObservedStateResponse) String() string {
 func (*ReadObservedStateResponse) ProtoMessage() {}
 
 func (x *ReadObservedStateResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[14]
+	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -834,7 +902,7 @@ func (x *ReadObservedStateResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReadObservedStateResponse.ProtoReflect.Descriptor instead.
 func (*ReadObservedStateResponse) Descriptor() ([]byte, []int) {
-	return file_kernloom_adapter_v1_adapter_proto_rawDescGZIP(), []int{14}
+	return file_kernloom_adapter_v1_adapter_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *ReadObservedStateResponse) GetObjects() []*ObservedObject {
@@ -855,7 +923,7 @@ type ObservedObject struct {
 
 func (x *ObservedObject) Reset() {
 	*x = ObservedObject{}
-	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[15]
+	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -867,7 +935,7 @@ func (x *ObservedObject) String() string {
 func (*ObservedObject) ProtoMessage() {}
 
 func (x *ObservedObject) ProtoReflect() protoreflect.Message {
-	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[15]
+	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -880,7 +948,7 @@ func (x *ObservedObject) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ObservedObject.ProtoReflect.Descriptor instead.
 func (*ObservedObject) Descriptor() ([]byte, []int) {
-	return file_kernloom_adapter_v1_adapter_proto_rawDescGZIP(), []int{15}
+	return file_kernloom_adapter_v1_adapter_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *ObservedObject) GetId() string {
@@ -913,7 +981,7 @@ type NormalizeStateRequest struct {
 
 func (x *NormalizeStateRequest) Reset() {
 	*x = NormalizeStateRequest{}
-	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[16]
+	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -925,7 +993,7 @@ func (x *NormalizeStateRequest) String() string {
 func (*NormalizeStateRequest) ProtoMessage() {}
 
 func (x *NormalizeStateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[16]
+	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -938,7 +1006,7 @@ func (x *NormalizeStateRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NormalizeStateRequest.ProtoReflect.Descriptor instead.
 func (*NormalizeStateRequest) Descriptor() ([]byte, []int) {
-	return file_kernloom_adapter_v1_adapter_proto_rawDescGZIP(), []int{16}
+	return file_kernloom_adapter_v1_adapter_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *NormalizeStateRequest) GetObjects() []*ObservedObject {
@@ -957,7 +1025,7 @@ type NormalizeStateResponse struct {
 
 func (x *NormalizeStateResponse) Reset() {
 	*x = NormalizeStateResponse{}
-	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[17]
+	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -969,7 +1037,7 @@ func (x *NormalizeStateResponse) String() string {
 func (*NormalizeStateResponse) ProtoMessage() {}
 
 func (x *NormalizeStateResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[17]
+	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -982,7 +1050,7 @@ func (x *NormalizeStateResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NormalizeStateResponse.ProtoReflect.Descriptor instead.
 func (*NormalizeStateResponse) Descriptor() ([]byte, []int) {
-	return file_kernloom_adapter_v1_adapter_proto_rawDescGZIP(), []int{17}
+	return file_kernloom_adapter_v1_adapter_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *NormalizeStateResponse) GetNormalizedObjects() []*ObservedObject {
@@ -1002,7 +1070,7 @@ type ProvideConformanceEvidenceRequest struct {
 
 func (x *ProvideConformanceEvidenceRequest) Reset() {
 	*x = ProvideConformanceEvidenceRequest{}
-	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[18]
+	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1014,7 +1082,7 @@ func (x *ProvideConformanceEvidenceRequest) String() string {
 func (*ProvideConformanceEvidenceRequest) ProtoMessage() {}
 
 func (x *ProvideConformanceEvidenceRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[18]
+	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1027,7 +1095,7 @@ func (x *ProvideConformanceEvidenceRequest) ProtoReflect() protoreflect.Message 
 
 // Deprecated: Use ProvideConformanceEvidenceRequest.ProtoReflect.Descriptor instead.
 func (*ProvideConformanceEvidenceRequest) Descriptor() ([]byte, []int) {
-	return file_kernloom_adapter_v1_adapter_proto_rawDescGZIP(), []int{18}
+	return file_kernloom_adapter_v1_adapter_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *ProvideConformanceEvidenceRequest) GetPolicyId() string {
@@ -1053,7 +1121,7 @@ type ProvideConformanceEvidenceResponse struct {
 
 func (x *ProvideConformanceEvidenceResponse) Reset() {
 	*x = ProvideConformanceEvidenceResponse{}
-	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[19]
+	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1065,7 +1133,7 @@ func (x *ProvideConformanceEvidenceResponse) String() string {
 func (*ProvideConformanceEvidenceResponse) ProtoMessage() {}
 
 func (x *ProvideConformanceEvidenceResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[19]
+	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1078,7 +1146,7 @@ func (x *ProvideConformanceEvidenceResponse) ProtoReflect() protoreflect.Message
 
 // Deprecated: Use ProvideConformanceEvidenceResponse.ProtoReflect.Descriptor instead.
 func (*ProvideConformanceEvidenceResponse) Descriptor() ([]byte, []int) {
-	return file_kernloom_adapter_v1_adapter_proto_rawDescGZIP(), []int{19}
+	return file_kernloom_adapter_v1_adapter_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *ProvideConformanceEvidenceResponse) GetEvidence() []*Evidence {
@@ -1097,7 +1165,7 @@ type ReadSignalsRequest struct {
 
 func (x *ReadSignalsRequest) Reset() {
 	*x = ReadSignalsRequest{}
-	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[20]
+	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1109,7 +1177,7 @@ func (x *ReadSignalsRequest) String() string {
 func (*ReadSignalsRequest) ProtoMessage() {}
 
 func (x *ReadSignalsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[20]
+	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1122,7 +1190,7 @@ func (x *ReadSignalsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReadSignalsRequest.ProtoReflect.Descriptor instead.
 func (*ReadSignalsRequest) Descriptor() ([]byte, []int) {
-	return file_kernloom_adapter_v1_adapter_proto_rawDescGZIP(), []int{20}
+	return file_kernloom_adapter_v1_adapter_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *ReadSignalsRequest) GetScope() string {
@@ -1141,7 +1209,7 @@ type ReadSignalsResponse struct {
 
 func (x *ReadSignalsResponse) Reset() {
 	*x = ReadSignalsResponse{}
-	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[21]
+	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1153,7 +1221,7 @@ func (x *ReadSignalsResponse) String() string {
 func (*ReadSignalsResponse) ProtoMessage() {}
 
 func (x *ReadSignalsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[21]
+	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1166,7 +1234,7 @@ func (x *ReadSignalsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReadSignalsResponse.ProtoReflect.Descriptor instead.
 func (*ReadSignalsResponse) Descriptor() ([]byte, []int) {
-	return file_kernloom_adapter_v1_adapter_proto_rawDescGZIP(), []int{21}
+	return file_kernloom_adapter_v1_adapter_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *ReadSignalsResponse) GetSignals() []*Signal {
@@ -1185,7 +1253,7 @@ type StreamSignalsRequest struct {
 
 func (x *StreamSignalsRequest) Reset() {
 	*x = StreamSignalsRequest{}
-	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[22]
+	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1197,7 +1265,7 @@ func (x *StreamSignalsRequest) String() string {
 func (*StreamSignalsRequest) ProtoMessage() {}
 
 func (x *StreamSignalsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[22]
+	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1210,7 +1278,7 @@ func (x *StreamSignalsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StreamSignalsRequest.ProtoReflect.Descriptor instead.
 func (*StreamSignalsRequest) Descriptor() ([]byte, []int) {
-	return file_kernloom_adapter_v1_adapter_proto_rawDescGZIP(), []int{22}
+	return file_kernloom_adapter_v1_adapter_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *StreamSignalsRequest) GetScope() string {
@@ -1229,7 +1297,7 @@ type StreamSignalsResponse struct {
 
 func (x *StreamSignalsResponse) Reset() {
 	*x = StreamSignalsResponse{}
-	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[23]
+	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1241,7 +1309,7 @@ func (x *StreamSignalsResponse) String() string {
 func (*StreamSignalsResponse) ProtoMessage() {}
 
 func (x *StreamSignalsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[23]
+	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1254,7 +1322,7 @@ func (x *StreamSignalsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StreamSignalsResponse.ProtoReflect.Descriptor instead.
 func (*StreamSignalsResponse) Descriptor() ([]byte, []int) {
-	return file_kernloom_adapter_v1_adapter_proto_rawDescGZIP(), []int{23}
+	return file_kernloom_adapter_v1_adapter_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *StreamSignalsResponse) GetSignal() *Signal {
@@ -1277,7 +1345,7 @@ type Signal struct {
 
 func (x *Signal) Reset() {
 	*x = Signal{}
-	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[24]
+	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1289,7 +1357,7 @@ func (x *Signal) String() string {
 func (*Signal) ProtoMessage() {}
 
 func (x *Signal) ProtoReflect() protoreflect.Message {
-	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[24]
+	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1302,7 +1370,7 @@ func (x *Signal) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Signal.ProtoReflect.Descriptor instead.
 func (*Signal) Descriptor() ([]byte, []int) {
-	return file_kernloom_adapter_v1_adapter_proto_rawDescGZIP(), []int{24}
+	return file_kernloom_adapter_v1_adapter_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *Signal) GetId() string {
@@ -1349,7 +1417,7 @@ type ProvideRelationshipsRequest struct {
 
 func (x *ProvideRelationshipsRequest) Reset() {
 	*x = ProvideRelationshipsRequest{}
-	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[25]
+	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1361,7 +1429,7 @@ func (x *ProvideRelationshipsRequest) String() string {
 func (*ProvideRelationshipsRequest) ProtoMessage() {}
 
 func (x *ProvideRelationshipsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[25]
+	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1374,7 +1442,7 @@ func (x *ProvideRelationshipsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProvideRelationshipsRequest.ProtoReflect.Descriptor instead.
 func (*ProvideRelationshipsRequest) Descriptor() ([]byte, []int) {
-	return file_kernloom_adapter_v1_adapter_proto_rawDescGZIP(), []int{25}
+	return file_kernloom_adapter_v1_adapter_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *ProvideRelationshipsRequest) GetScope() string {
@@ -1393,7 +1461,7 @@ type ProvideRelationshipsResponse struct {
 
 func (x *ProvideRelationshipsResponse) Reset() {
 	*x = ProvideRelationshipsResponse{}
-	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[26]
+	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1405,7 +1473,7 @@ func (x *ProvideRelationshipsResponse) String() string {
 func (*ProvideRelationshipsResponse) ProtoMessage() {}
 
 func (x *ProvideRelationshipsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[26]
+	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1418,7 +1486,7 @@ func (x *ProvideRelationshipsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProvideRelationshipsResponse.ProtoReflect.Descriptor instead.
 func (*ProvideRelationshipsResponse) Descriptor() ([]byte, []int) {
-	return file_kernloom_adapter_v1_adapter_proto_rawDescGZIP(), []int{26}
+	return file_kernloom_adapter_v1_adapter_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *ProvideRelationshipsResponse) GetRelationships() []*Relationship {
@@ -1439,7 +1507,7 @@ type Relationship struct {
 
 func (x *Relationship) Reset() {
 	*x = Relationship{}
-	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[27]
+	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1451,7 +1519,7 @@ func (x *Relationship) String() string {
 func (*Relationship) ProtoMessage() {}
 
 func (x *Relationship) ProtoReflect() protoreflect.Message {
-	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[27]
+	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1464,7 +1532,7 @@ func (x *Relationship) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Relationship.ProtoReflect.Descriptor instead.
 func (*Relationship) Descriptor() ([]byte, []int) {
-	return file_kernloom_adapter_v1_adapter_proto_rawDescGZIP(), []int{27}
+	return file_kernloom_adapter_v1_adapter_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *Relationship) GetSubject() string {
@@ -1507,7 +1575,7 @@ type ExecuteRuntimeActionRequest struct {
 
 func (x *ExecuteRuntimeActionRequest) Reset() {
 	*x = ExecuteRuntimeActionRequest{}
-	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[28]
+	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1519,7 +1587,7 @@ func (x *ExecuteRuntimeActionRequest) String() string {
 func (*ExecuteRuntimeActionRequest) ProtoMessage() {}
 
 func (x *ExecuteRuntimeActionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[28]
+	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1532,7 +1600,7 @@ func (x *ExecuteRuntimeActionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ExecuteRuntimeActionRequest.ProtoReflect.Descriptor instead.
 func (*ExecuteRuntimeActionRequest) Descriptor() ([]byte, []int) {
-	return file_kernloom_adapter_v1_adapter_proto_rawDescGZIP(), []int{28}
+	return file_kernloom_adapter_v1_adapter_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *ExecuteRuntimeActionRequest) GetRuntimeActionId() string {
@@ -1622,7 +1690,7 @@ type ExecuteRuntimeActionResponse struct {
 
 func (x *ExecuteRuntimeActionResponse) Reset() {
 	*x = ExecuteRuntimeActionResponse{}
-	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[29]
+	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1634,7 +1702,7 @@ func (x *ExecuteRuntimeActionResponse) String() string {
 func (*ExecuteRuntimeActionResponse) ProtoMessage() {}
 
 func (x *ExecuteRuntimeActionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[29]
+	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1647,7 +1715,7 @@ func (x *ExecuteRuntimeActionResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ExecuteRuntimeActionResponse.ProtoReflect.Descriptor instead.
 func (*ExecuteRuntimeActionResponse) Descriptor() ([]byte, []int) {
-	return file_kernloom_adapter_v1_adapter_proto_rawDescGZIP(), []int{29}
+	return file_kernloom_adapter_v1_adapter_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *ExecuteRuntimeActionResponse) GetStatus() string {
@@ -1673,7 +1741,7 @@ type GetRuntimeActionStateRequest struct {
 
 func (x *GetRuntimeActionStateRequest) Reset() {
 	*x = GetRuntimeActionStateRequest{}
-	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[30]
+	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1685,7 +1753,7 @@ func (x *GetRuntimeActionStateRequest) String() string {
 func (*GetRuntimeActionStateRequest) ProtoMessage() {}
 
 func (x *GetRuntimeActionStateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[30]
+	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1698,7 +1766,7 @@ func (x *GetRuntimeActionStateRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetRuntimeActionStateRequest.ProtoReflect.Descriptor instead.
 func (*GetRuntimeActionStateRequest) Descriptor() ([]byte, []int) {
-	return file_kernloom_adapter_v1_adapter_proto_rawDescGZIP(), []int{30}
+	return file_kernloom_adapter_v1_adapter_proto_rawDescGZIP(), []int{31}
 }
 
 func (x *GetRuntimeActionStateRequest) GetIdempotencyKey() string {
@@ -1718,7 +1786,7 @@ type GetRuntimeActionStateResponse struct {
 
 func (x *GetRuntimeActionStateResponse) Reset() {
 	*x = GetRuntimeActionStateResponse{}
-	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[31]
+	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1730,7 +1798,7 @@ func (x *GetRuntimeActionStateResponse) String() string {
 func (*GetRuntimeActionStateResponse) ProtoMessage() {}
 
 func (x *GetRuntimeActionStateResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[31]
+	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1743,7 +1811,7 @@ func (x *GetRuntimeActionStateResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetRuntimeActionStateResponse.ProtoReflect.Descriptor instead.
 func (*GetRuntimeActionStateResponse) Descriptor() ([]byte, []int) {
-	return file_kernloom_adapter_v1_adapter_proto_rawDescGZIP(), []int{31}
+	return file_kernloom_adapter_v1_adapter_proto_rawDescGZIP(), []int{32}
 }
 
 func (x *GetRuntimeActionStateResponse) GetStatus() string {
@@ -1771,7 +1839,7 @@ type RevokeRuntimeActionRequest struct {
 
 func (x *RevokeRuntimeActionRequest) Reset() {
 	*x = RevokeRuntimeActionRequest{}
-	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[32]
+	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1783,7 +1851,7 @@ func (x *RevokeRuntimeActionRequest) String() string {
 func (*RevokeRuntimeActionRequest) ProtoMessage() {}
 
 func (x *RevokeRuntimeActionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[32]
+	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1796,7 +1864,7 @@ func (x *RevokeRuntimeActionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RevokeRuntimeActionRequest.ProtoReflect.Descriptor instead.
 func (*RevokeRuntimeActionRequest) Descriptor() ([]byte, []int) {
-	return file_kernloom_adapter_v1_adapter_proto_rawDescGZIP(), []int{32}
+	return file_kernloom_adapter_v1_adapter_proto_rawDescGZIP(), []int{33}
 }
 
 func (x *RevokeRuntimeActionRequest) GetIdempotencyKey() string {
@@ -1830,7 +1898,7 @@ type RevokeRuntimeActionResponse struct {
 
 func (x *RevokeRuntimeActionResponse) Reset() {
 	*x = RevokeRuntimeActionResponse{}
-	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[33]
+	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1842,7 +1910,7 @@ func (x *RevokeRuntimeActionResponse) String() string {
 func (*RevokeRuntimeActionResponse) ProtoMessage() {}
 
 func (x *RevokeRuntimeActionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[33]
+	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1855,7 +1923,7 @@ func (x *RevokeRuntimeActionResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RevokeRuntimeActionResponse.ProtoReflect.Descriptor instead.
 func (*RevokeRuntimeActionResponse) Descriptor() ([]byte, []int) {
-	return file_kernloom_adapter_v1_adapter_proto_rawDescGZIP(), []int{33}
+	return file_kernloom_adapter_v1_adapter_proto_rawDescGZIP(), []int{34}
 }
 
 func (x *RevokeRuntimeActionResponse) GetStatus() string {
@@ -1881,7 +1949,7 @@ type ProvideAttestationEvidenceRequest struct {
 
 func (x *ProvideAttestationEvidenceRequest) Reset() {
 	*x = ProvideAttestationEvidenceRequest{}
-	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[34]
+	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1893,7 +1961,7 @@ func (x *ProvideAttestationEvidenceRequest) String() string {
 func (*ProvideAttestationEvidenceRequest) ProtoMessage() {}
 
 func (x *ProvideAttestationEvidenceRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[34]
+	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1906,7 +1974,7 @@ func (x *ProvideAttestationEvidenceRequest) ProtoReflect() protoreflect.Message 
 
 // Deprecated: Use ProvideAttestationEvidenceRequest.ProtoReflect.Descriptor instead.
 func (*ProvideAttestationEvidenceRequest) Descriptor() ([]byte, []int) {
-	return file_kernloom_adapter_v1_adapter_proto_rawDescGZIP(), []int{34}
+	return file_kernloom_adapter_v1_adapter_proto_rawDescGZIP(), []int{35}
 }
 
 func (x *ProvideAttestationEvidenceRequest) GetNodeId() string {
@@ -1925,7 +1993,7 @@ type ProvideAttestationEvidenceResponse struct {
 
 func (x *ProvideAttestationEvidenceResponse) Reset() {
 	*x = ProvideAttestationEvidenceResponse{}
-	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[35]
+	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1937,7 +2005,7 @@ func (x *ProvideAttestationEvidenceResponse) String() string {
 func (*ProvideAttestationEvidenceResponse) ProtoMessage() {}
 
 func (x *ProvideAttestationEvidenceResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[35]
+	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1950,7 +2018,7 @@ func (x *ProvideAttestationEvidenceResponse) ProtoReflect() protoreflect.Message
 
 // Deprecated: Use ProvideAttestationEvidenceResponse.ProtoReflect.Descriptor instead.
 func (*ProvideAttestationEvidenceResponse) Descriptor() ([]byte, []int) {
-	return file_kernloom_adapter_v1_adapter_proto_rawDescGZIP(), []int{35}
+	return file_kernloom_adapter_v1_adapter_proto_rawDescGZIP(), []int{36}
 }
 
 func (x *ProvideAttestationEvidenceResponse) GetEvidence() []*Evidence {
@@ -1974,7 +2042,7 @@ type Evidence struct {
 
 func (x *Evidence) Reset() {
 	*x = Evidence{}
-	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[36]
+	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[37]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1986,7 +2054,7 @@ func (x *Evidence) String() string {
 func (*Evidence) ProtoMessage() {}
 
 func (x *Evidence) ProtoReflect() protoreflect.Message {
-	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[36]
+	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[37]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1999,7 +2067,7 @@ func (x *Evidence) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Evidence.ProtoReflect.Descriptor instead.
 func (*Evidence) Descriptor() ([]byte, []int) {
-	return file_kernloom_adapter_v1_adapter_proto_rawDescGZIP(), []int{36}
+	return file_kernloom_adapter_v1_adapter_proto_rawDescGZIP(), []int{37}
 }
 
 func (x *Evidence) GetId() string {
@@ -2056,7 +2124,7 @@ type Finding struct {
 
 func (x *Finding) Reset() {
 	*x = Finding{}
-	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[37]
+	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[38]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2068,7 +2136,7 @@ func (x *Finding) String() string {
 func (*Finding) ProtoMessage() {}
 
 func (x *Finding) ProtoReflect() protoreflect.Message {
-	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[37]
+	mi := &file_kernloom_adapter_v1_adapter_proto_msgTypes[38]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2081,7 +2149,7 @@ func (x *Finding) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Finding.ProtoReflect.Descriptor instead.
 func (*Finding) Descriptor() ([]byte, []int) {
-	return file_kernloom_adapter_v1_adapter_proto_rawDescGZIP(), []int{37}
+	return file_kernloom_adapter_v1_adapter_proto_rawDescGZIP(), []int{38}
 }
 
 func (x *Finding) GetId() string {
@@ -2119,7 +2187,7 @@ const file_kernloom_adapter_v1_adapter_proto_rawDesc = "" +
 	"!kernloom/adapter/v1/adapter.proto\x12\x13kernloom.adapter.v1\"\x11\n" +
 	"\x0fDescribeRequest\"T\n" +
 	"\x10DescribeResponse\x12@\n" +
-	"\aadapter\x18\x01 \x01(\v2&.kernloom.adapter.v1.AdapterDescriptorR\aadapter\"\x88\x03\n" +
+	"\aadapter\x18\x01 \x01(\v2&.kernloom.adapter.v1.AdapterDescriptorR\aadapter\"\xdb\x03\n" +
 	"\x11AdapterDescriptor\x12\x1d\n" +
 	"\n" +
 	"adapter_id\x18\x01 \x01(\tR\tadapterId\x12\x12\n" +
@@ -2130,7 +2198,12 @@ const file_kernloom_adapter_v1_adapter_proto_rawDesc = "" +
 	"\n" +
 	"privileges\x18\x06 \x03(\v2(.kernloom.adapter.v1.PrivilegeDescriptorR\n" +
 	"privileges\x12\x16\n" +
-	"\x06facets\x18\a \x03(\tR\x06facets\"\xa0\x01\n" +
+	"\x06facets\x18\a \x03(\tR\x06facets\x12Q\n" +
+	"\x11facet_descriptors\x18\b \x03(\v2$.kernloom.adapter.v1.FacetDescriptorR\x10facetDescriptors\"W\n" +
+	"\x0fFacetDescriptor\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\x12\x16\n" +
+	"\x06status\x18\x02 \x01(\tR\x06status\x12\x18\n" +
+	"\amessage\x18\x03 \x01(\tR\amessage\"\xa0\x01\n" +
 	"\x14CapabilityDescriptor\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12!\n" +
 	"\fdisplay_name\x18\x02 \x01(\tR\vdisplayName\x12\x12\n" +
@@ -2285,99 +2358,101 @@ func file_kernloom_adapter_v1_adapter_proto_rawDescGZIP() []byte {
 	return file_kernloom_adapter_v1_adapter_proto_rawDescData
 }
 
-var file_kernloom_adapter_v1_adapter_proto_msgTypes = make([]protoimpl.MessageInfo, 38)
+var file_kernloom_adapter_v1_adapter_proto_msgTypes = make([]protoimpl.MessageInfo, 39)
 var file_kernloom_adapter_v1_adapter_proto_goTypes = []any{
 	(*DescribeRequest)(nil),                    // 0: kernloom.adapter.v1.DescribeRequest
 	(*DescribeResponse)(nil),                   // 1: kernloom.adapter.v1.DescribeResponse
 	(*AdapterDescriptor)(nil),                  // 2: kernloom.adapter.v1.AdapterDescriptor
-	(*CapabilityDescriptor)(nil),               // 3: kernloom.adapter.v1.CapabilityDescriptor
-	(*ContextRequirementDescriptor)(nil),       // 4: kernloom.adapter.v1.ContextRequirementDescriptor
-	(*PrivilegeDescriptor)(nil),                // 5: kernloom.adapter.v1.PrivilegeDescriptor
-	(*HealthRequest)(nil),                      // 6: kernloom.adapter.v1.HealthRequest
-	(*HealthResponse)(nil),                     // 7: kernloom.adapter.v1.HealthResponse
-	(*PlanConfigRequest)(nil),                  // 8: kernloom.adapter.v1.PlanConfigRequest
-	(*PlanConfigResponse)(nil),                 // 9: kernloom.adapter.v1.PlanConfigResponse
-	(*ConfigChange)(nil),                       // 10: kernloom.adapter.v1.ConfigChange
-	(*ValidateConfigRequest)(nil),              // 11: kernloom.adapter.v1.ValidateConfigRequest
-	(*ValidateConfigResponse)(nil),             // 12: kernloom.adapter.v1.ValidateConfigResponse
-	(*ReadObservedStateRequest)(nil),           // 13: kernloom.adapter.v1.ReadObservedStateRequest
-	(*ReadObservedStateResponse)(nil),          // 14: kernloom.adapter.v1.ReadObservedStateResponse
-	(*ObservedObject)(nil),                     // 15: kernloom.adapter.v1.ObservedObject
-	(*NormalizeStateRequest)(nil),              // 16: kernloom.adapter.v1.NormalizeStateRequest
-	(*NormalizeStateResponse)(nil),             // 17: kernloom.adapter.v1.NormalizeStateResponse
-	(*ProvideConformanceEvidenceRequest)(nil),  // 18: kernloom.adapter.v1.ProvideConformanceEvidenceRequest
-	(*ProvideConformanceEvidenceResponse)(nil), // 19: kernloom.adapter.v1.ProvideConformanceEvidenceResponse
-	(*ReadSignalsRequest)(nil),                 // 20: kernloom.adapter.v1.ReadSignalsRequest
-	(*ReadSignalsResponse)(nil),                // 21: kernloom.adapter.v1.ReadSignalsResponse
-	(*StreamSignalsRequest)(nil),               // 22: kernloom.adapter.v1.StreamSignalsRequest
-	(*StreamSignalsResponse)(nil),              // 23: kernloom.adapter.v1.StreamSignalsResponse
-	(*Signal)(nil),                             // 24: kernloom.adapter.v1.Signal
-	(*ProvideRelationshipsRequest)(nil),        // 25: kernloom.adapter.v1.ProvideRelationshipsRequest
-	(*ProvideRelationshipsResponse)(nil),       // 26: kernloom.adapter.v1.ProvideRelationshipsResponse
-	(*Relationship)(nil),                       // 27: kernloom.adapter.v1.Relationship
-	(*ExecuteRuntimeActionRequest)(nil),        // 28: kernloom.adapter.v1.ExecuteRuntimeActionRequest
-	(*ExecuteRuntimeActionResponse)(nil),       // 29: kernloom.adapter.v1.ExecuteRuntimeActionResponse
-	(*GetRuntimeActionStateRequest)(nil),       // 30: kernloom.adapter.v1.GetRuntimeActionStateRequest
-	(*GetRuntimeActionStateResponse)(nil),      // 31: kernloom.adapter.v1.GetRuntimeActionStateResponse
-	(*RevokeRuntimeActionRequest)(nil),         // 32: kernloom.adapter.v1.RevokeRuntimeActionRequest
-	(*RevokeRuntimeActionResponse)(nil),        // 33: kernloom.adapter.v1.RevokeRuntimeActionResponse
-	(*ProvideAttestationEvidenceRequest)(nil),  // 34: kernloom.adapter.v1.ProvideAttestationEvidenceRequest
-	(*ProvideAttestationEvidenceResponse)(nil), // 35: kernloom.adapter.v1.ProvideAttestationEvidenceResponse
-	(*Evidence)(nil),                           // 36: kernloom.adapter.v1.Evidence
-	(*Finding)(nil),                            // 37: kernloom.adapter.v1.Finding
+	(*FacetDescriptor)(nil),                    // 3: kernloom.adapter.v1.FacetDescriptor
+	(*CapabilityDescriptor)(nil),               // 4: kernloom.adapter.v1.CapabilityDescriptor
+	(*ContextRequirementDescriptor)(nil),       // 5: kernloom.adapter.v1.ContextRequirementDescriptor
+	(*PrivilegeDescriptor)(nil),                // 6: kernloom.adapter.v1.PrivilegeDescriptor
+	(*HealthRequest)(nil),                      // 7: kernloom.adapter.v1.HealthRequest
+	(*HealthResponse)(nil),                     // 8: kernloom.adapter.v1.HealthResponse
+	(*PlanConfigRequest)(nil),                  // 9: kernloom.adapter.v1.PlanConfigRequest
+	(*PlanConfigResponse)(nil),                 // 10: kernloom.adapter.v1.PlanConfigResponse
+	(*ConfigChange)(nil),                       // 11: kernloom.adapter.v1.ConfigChange
+	(*ValidateConfigRequest)(nil),              // 12: kernloom.adapter.v1.ValidateConfigRequest
+	(*ValidateConfigResponse)(nil),             // 13: kernloom.adapter.v1.ValidateConfigResponse
+	(*ReadObservedStateRequest)(nil),           // 14: kernloom.adapter.v1.ReadObservedStateRequest
+	(*ReadObservedStateResponse)(nil),          // 15: kernloom.adapter.v1.ReadObservedStateResponse
+	(*ObservedObject)(nil),                     // 16: kernloom.adapter.v1.ObservedObject
+	(*NormalizeStateRequest)(nil),              // 17: kernloom.adapter.v1.NormalizeStateRequest
+	(*NormalizeStateResponse)(nil),             // 18: kernloom.adapter.v1.NormalizeStateResponse
+	(*ProvideConformanceEvidenceRequest)(nil),  // 19: kernloom.adapter.v1.ProvideConformanceEvidenceRequest
+	(*ProvideConformanceEvidenceResponse)(nil), // 20: kernloom.adapter.v1.ProvideConformanceEvidenceResponse
+	(*ReadSignalsRequest)(nil),                 // 21: kernloom.adapter.v1.ReadSignalsRequest
+	(*ReadSignalsResponse)(nil),                // 22: kernloom.adapter.v1.ReadSignalsResponse
+	(*StreamSignalsRequest)(nil),               // 23: kernloom.adapter.v1.StreamSignalsRequest
+	(*StreamSignalsResponse)(nil),              // 24: kernloom.adapter.v1.StreamSignalsResponse
+	(*Signal)(nil),                             // 25: kernloom.adapter.v1.Signal
+	(*ProvideRelationshipsRequest)(nil),        // 26: kernloom.adapter.v1.ProvideRelationshipsRequest
+	(*ProvideRelationshipsResponse)(nil),       // 27: kernloom.adapter.v1.ProvideRelationshipsResponse
+	(*Relationship)(nil),                       // 28: kernloom.adapter.v1.Relationship
+	(*ExecuteRuntimeActionRequest)(nil),        // 29: kernloom.adapter.v1.ExecuteRuntimeActionRequest
+	(*ExecuteRuntimeActionResponse)(nil),       // 30: kernloom.adapter.v1.ExecuteRuntimeActionResponse
+	(*GetRuntimeActionStateRequest)(nil),       // 31: kernloom.adapter.v1.GetRuntimeActionStateRequest
+	(*GetRuntimeActionStateResponse)(nil),      // 32: kernloom.adapter.v1.GetRuntimeActionStateResponse
+	(*RevokeRuntimeActionRequest)(nil),         // 33: kernloom.adapter.v1.RevokeRuntimeActionRequest
+	(*RevokeRuntimeActionResponse)(nil),        // 34: kernloom.adapter.v1.RevokeRuntimeActionResponse
+	(*ProvideAttestationEvidenceRequest)(nil),  // 35: kernloom.adapter.v1.ProvideAttestationEvidenceRequest
+	(*ProvideAttestationEvidenceResponse)(nil), // 36: kernloom.adapter.v1.ProvideAttestationEvidenceResponse
+	(*Evidence)(nil),                           // 37: kernloom.adapter.v1.Evidence
+	(*Finding)(nil),                            // 38: kernloom.adapter.v1.Finding
 }
 var file_kernloom_adapter_v1_adapter_proto_depIdxs = []int32{
 	2,  // 0: kernloom.adapter.v1.DescribeResponse.adapter:type_name -> kernloom.adapter.v1.AdapterDescriptor
-	3,  // 1: kernloom.adapter.v1.AdapterDescriptor.capabilities:type_name -> kernloom.adapter.v1.CapabilityDescriptor
-	4,  // 2: kernloom.adapter.v1.AdapterDescriptor.context_requirements:type_name -> kernloom.adapter.v1.ContextRequirementDescriptor
-	5,  // 3: kernloom.adapter.v1.AdapterDescriptor.privileges:type_name -> kernloom.adapter.v1.PrivilegeDescriptor
-	10, // 4: kernloom.adapter.v1.PlanConfigResponse.proposed_changes:type_name -> kernloom.adapter.v1.ConfigChange
-	10, // 5: kernloom.adapter.v1.ValidateConfigRequest.proposed_changes:type_name -> kernloom.adapter.v1.ConfigChange
-	37, // 6: kernloom.adapter.v1.ValidateConfigResponse.findings:type_name -> kernloom.adapter.v1.Finding
-	15, // 7: kernloom.adapter.v1.ReadObservedStateResponse.objects:type_name -> kernloom.adapter.v1.ObservedObject
-	15, // 8: kernloom.adapter.v1.NormalizeStateRequest.objects:type_name -> kernloom.adapter.v1.ObservedObject
-	15, // 9: kernloom.adapter.v1.NormalizeStateResponse.normalized_objects:type_name -> kernloom.adapter.v1.ObservedObject
-	36, // 10: kernloom.adapter.v1.ProvideConformanceEvidenceResponse.evidence:type_name -> kernloom.adapter.v1.Evidence
-	24, // 11: kernloom.adapter.v1.ReadSignalsResponse.signals:type_name -> kernloom.adapter.v1.Signal
-	24, // 12: kernloom.adapter.v1.StreamSignalsResponse.signal:type_name -> kernloom.adapter.v1.Signal
-	27, // 13: kernloom.adapter.v1.ProvideRelationshipsResponse.relationships:type_name -> kernloom.adapter.v1.Relationship
-	36, // 14: kernloom.adapter.v1.ExecuteRuntimeActionResponse.evidence:type_name -> kernloom.adapter.v1.Evidence
-	36, // 15: kernloom.adapter.v1.GetRuntimeActionStateResponse.evidence:type_name -> kernloom.adapter.v1.Evidence
-	36, // 16: kernloom.adapter.v1.RevokeRuntimeActionResponse.evidence:type_name -> kernloom.adapter.v1.Evidence
-	36, // 17: kernloom.adapter.v1.ProvideAttestationEvidenceResponse.evidence:type_name -> kernloom.adapter.v1.Evidence
-	0,  // 18: kernloom.adapter.v1.AdapterService.Describe:input_type -> kernloom.adapter.v1.DescribeRequest
-	6,  // 19: kernloom.adapter.v1.AdapterService.Health:input_type -> kernloom.adapter.v1.HealthRequest
-	8,  // 20: kernloom.adapter.v1.AdapterService.PlanConfig:input_type -> kernloom.adapter.v1.PlanConfigRequest
-	11, // 21: kernloom.adapter.v1.AdapterService.ValidateConfig:input_type -> kernloom.adapter.v1.ValidateConfigRequest
-	13, // 22: kernloom.adapter.v1.AdapterService.ReadObservedState:input_type -> kernloom.adapter.v1.ReadObservedStateRequest
-	16, // 23: kernloom.adapter.v1.AdapterService.NormalizeState:input_type -> kernloom.adapter.v1.NormalizeStateRequest
-	18, // 24: kernloom.adapter.v1.AdapterService.ProvideConformanceEvidence:input_type -> kernloom.adapter.v1.ProvideConformanceEvidenceRequest
-	20, // 25: kernloom.adapter.v1.AdapterService.ReadSignals:input_type -> kernloom.adapter.v1.ReadSignalsRequest
-	22, // 26: kernloom.adapter.v1.AdapterService.StreamSignals:input_type -> kernloom.adapter.v1.StreamSignalsRequest
-	25, // 27: kernloom.adapter.v1.AdapterService.ProvideRelationships:input_type -> kernloom.adapter.v1.ProvideRelationshipsRequest
-	28, // 28: kernloom.adapter.v1.AdapterService.ExecuteRuntimeAction:input_type -> kernloom.adapter.v1.ExecuteRuntimeActionRequest
-	30, // 29: kernloom.adapter.v1.AdapterService.GetRuntimeActionState:input_type -> kernloom.adapter.v1.GetRuntimeActionStateRequest
-	32, // 30: kernloom.adapter.v1.AdapterService.RevokeRuntimeAction:input_type -> kernloom.adapter.v1.RevokeRuntimeActionRequest
-	34, // 31: kernloom.adapter.v1.AdapterService.ProvideAttestationEvidence:input_type -> kernloom.adapter.v1.ProvideAttestationEvidenceRequest
-	1,  // 32: kernloom.adapter.v1.AdapterService.Describe:output_type -> kernloom.adapter.v1.DescribeResponse
-	7,  // 33: kernloom.adapter.v1.AdapterService.Health:output_type -> kernloom.adapter.v1.HealthResponse
-	9,  // 34: kernloom.adapter.v1.AdapterService.PlanConfig:output_type -> kernloom.adapter.v1.PlanConfigResponse
-	12, // 35: kernloom.adapter.v1.AdapterService.ValidateConfig:output_type -> kernloom.adapter.v1.ValidateConfigResponse
-	14, // 36: kernloom.adapter.v1.AdapterService.ReadObservedState:output_type -> kernloom.adapter.v1.ReadObservedStateResponse
-	17, // 37: kernloom.adapter.v1.AdapterService.NormalizeState:output_type -> kernloom.adapter.v1.NormalizeStateResponse
-	19, // 38: kernloom.adapter.v1.AdapterService.ProvideConformanceEvidence:output_type -> kernloom.adapter.v1.ProvideConformanceEvidenceResponse
-	21, // 39: kernloom.adapter.v1.AdapterService.ReadSignals:output_type -> kernloom.adapter.v1.ReadSignalsResponse
-	23, // 40: kernloom.adapter.v1.AdapterService.StreamSignals:output_type -> kernloom.adapter.v1.StreamSignalsResponse
-	26, // 41: kernloom.adapter.v1.AdapterService.ProvideRelationships:output_type -> kernloom.adapter.v1.ProvideRelationshipsResponse
-	29, // 42: kernloom.adapter.v1.AdapterService.ExecuteRuntimeAction:output_type -> kernloom.adapter.v1.ExecuteRuntimeActionResponse
-	31, // 43: kernloom.adapter.v1.AdapterService.GetRuntimeActionState:output_type -> kernloom.adapter.v1.GetRuntimeActionStateResponse
-	33, // 44: kernloom.adapter.v1.AdapterService.RevokeRuntimeAction:output_type -> kernloom.adapter.v1.RevokeRuntimeActionResponse
-	35, // 45: kernloom.adapter.v1.AdapterService.ProvideAttestationEvidence:output_type -> kernloom.adapter.v1.ProvideAttestationEvidenceResponse
-	32, // [32:46] is the sub-list for method output_type
-	18, // [18:32] is the sub-list for method input_type
-	18, // [18:18] is the sub-list for extension type_name
-	18, // [18:18] is the sub-list for extension extendee
-	0,  // [0:18] is the sub-list for field type_name
+	4,  // 1: kernloom.adapter.v1.AdapterDescriptor.capabilities:type_name -> kernloom.adapter.v1.CapabilityDescriptor
+	5,  // 2: kernloom.adapter.v1.AdapterDescriptor.context_requirements:type_name -> kernloom.adapter.v1.ContextRequirementDescriptor
+	6,  // 3: kernloom.adapter.v1.AdapterDescriptor.privileges:type_name -> kernloom.adapter.v1.PrivilegeDescriptor
+	3,  // 4: kernloom.adapter.v1.AdapterDescriptor.facet_descriptors:type_name -> kernloom.adapter.v1.FacetDescriptor
+	11, // 5: kernloom.adapter.v1.PlanConfigResponse.proposed_changes:type_name -> kernloom.adapter.v1.ConfigChange
+	11, // 6: kernloom.adapter.v1.ValidateConfigRequest.proposed_changes:type_name -> kernloom.adapter.v1.ConfigChange
+	38, // 7: kernloom.adapter.v1.ValidateConfigResponse.findings:type_name -> kernloom.adapter.v1.Finding
+	16, // 8: kernloom.adapter.v1.ReadObservedStateResponse.objects:type_name -> kernloom.adapter.v1.ObservedObject
+	16, // 9: kernloom.adapter.v1.NormalizeStateRequest.objects:type_name -> kernloom.adapter.v1.ObservedObject
+	16, // 10: kernloom.adapter.v1.NormalizeStateResponse.normalized_objects:type_name -> kernloom.adapter.v1.ObservedObject
+	37, // 11: kernloom.adapter.v1.ProvideConformanceEvidenceResponse.evidence:type_name -> kernloom.adapter.v1.Evidence
+	25, // 12: kernloom.adapter.v1.ReadSignalsResponse.signals:type_name -> kernloom.adapter.v1.Signal
+	25, // 13: kernloom.adapter.v1.StreamSignalsResponse.signal:type_name -> kernloom.adapter.v1.Signal
+	28, // 14: kernloom.adapter.v1.ProvideRelationshipsResponse.relationships:type_name -> kernloom.adapter.v1.Relationship
+	37, // 15: kernloom.adapter.v1.ExecuteRuntimeActionResponse.evidence:type_name -> kernloom.adapter.v1.Evidence
+	37, // 16: kernloom.adapter.v1.GetRuntimeActionStateResponse.evidence:type_name -> kernloom.adapter.v1.Evidence
+	37, // 17: kernloom.adapter.v1.RevokeRuntimeActionResponse.evidence:type_name -> kernloom.adapter.v1.Evidence
+	37, // 18: kernloom.adapter.v1.ProvideAttestationEvidenceResponse.evidence:type_name -> kernloom.adapter.v1.Evidence
+	0,  // 19: kernloom.adapter.v1.AdapterService.Describe:input_type -> kernloom.adapter.v1.DescribeRequest
+	7,  // 20: kernloom.adapter.v1.AdapterService.Health:input_type -> kernloom.adapter.v1.HealthRequest
+	9,  // 21: kernloom.adapter.v1.AdapterService.PlanConfig:input_type -> kernloom.adapter.v1.PlanConfigRequest
+	12, // 22: kernloom.adapter.v1.AdapterService.ValidateConfig:input_type -> kernloom.adapter.v1.ValidateConfigRequest
+	14, // 23: kernloom.adapter.v1.AdapterService.ReadObservedState:input_type -> kernloom.adapter.v1.ReadObservedStateRequest
+	17, // 24: kernloom.adapter.v1.AdapterService.NormalizeState:input_type -> kernloom.adapter.v1.NormalizeStateRequest
+	19, // 25: kernloom.adapter.v1.AdapterService.ProvideConformanceEvidence:input_type -> kernloom.adapter.v1.ProvideConformanceEvidenceRequest
+	21, // 26: kernloom.adapter.v1.AdapterService.ReadSignals:input_type -> kernloom.adapter.v1.ReadSignalsRequest
+	23, // 27: kernloom.adapter.v1.AdapterService.StreamSignals:input_type -> kernloom.adapter.v1.StreamSignalsRequest
+	26, // 28: kernloom.adapter.v1.AdapterService.ProvideRelationships:input_type -> kernloom.adapter.v1.ProvideRelationshipsRequest
+	29, // 29: kernloom.adapter.v1.AdapterService.ExecuteRuntimeAction:input_type -> kernloom.adapter.v1.ExecuteRuntimeActionRequest
+	31, // 30: kernloom.adapter.v1.AdapterService.GetRuntimeActionState:input_type -> kernloom.adapter.v1.GetRuntimeActionStateRequest
+	33, // 31: kernloom.adapter.v1.AdapterService.RevokeRuntimeAction:input_type -> kernloom.adapter.v1.RevokeRuntimeActionRequest
+	35, // 32: kernloom.adapter.v1.AdapterService.ProvideAttestationEvidence:input_type -> kernloom.adapter.v1.ProvideAttestationEvidenceRequest
+	1,  // 33: kernloom.adapter.v1.AdapterService.Describe:output_type -> kernloom.adapter.v1.DescribeResponse
+	8,  // 34: kernloom.adapter.v1.AdapterService.Health:output_type -> kernloom.adapter.v1.HealthResponse
+	10, // 35: kernloom.adapter.v1.AdapterService.PlanConfig:output_type -> kernloom.adapter.v1.PlanConfigResponse
+	13, // 36: kernloom.adapter.v1.AdapterService.ValidateConfig:output_type -> kernloom.adapter.v1.ValidateConfigResponse
+	15, // 37: kernloom.adapter.v1.AdapterService.ReadObservedState:output_type -> kernloom.adapter.v1.ReadObservedStateResponse
+	18, // 38: kernloom.adapter.v1.AdapterService.NormalizeState:output_type -> kernloom.adapter.v1.NormalizeStateResponse
+	20, // 39: kernloom.adapter.v1.AdapterService.ProvideConformanceEvidence:output_type -> kernloom.adapter.v1.ProvideConformanceEvidenceResponse
+	22, // 40: kernloom.adapter.v1.AdapterService.ReadSignals:output_type -> kernloom.adapter.v1.ReadSignalsResponse
+	24, // 41: kernloom.adapter.v1.AdapterService.StreamSignals:output_type -> kernloom.adapter.v1.StreamSignalsResponse
+	27, // 42: kernloom.adapter.v1.AdapterService.ProvideRelationships:output_type -> kernloom.adapter.v1.ProvideRelationshipsResponse
+	30, // 43: kernloom.adapter.v1.AdapterService.ExecuteRuntimeAction:output_type -> kernloom.adapter.v1.ExecuteRuntimeActionResponse
+	32, // 44: kernloom.adapter.v1.AdapterService.GetRuntimeActionState:output_type -> kernloom.adapter.v1.GetRuntimeActionStateResponse
+	34, // 45: kernloom.adapter.v1.AdapterService.RevokeRuntimeAction:output_type -> kernloom.adapter.v1.RevokeRuntimeActionResponse
+	36, // 46: kernloom.adapter.v1.AdapterService.ProvideAttestationEvidence:output_type -> kernloom.adapter.v1.ProvideAttestationEvidenceResponse
+	33, // [33:47] is the sub-list for method output_type
+	19, // [19:33] is the sub-list for method input_type
+	19, // [19:19] is the sub-list for extension type_name
+	19, // [19:19] is the sub-list for extension extendee
+	0,  // [0:19] is the sub-list for field type_name
 }
 
 func init() { file_kernloom_adapter_v1_adapter_proto_init() }
@@ -2391,7 +2466,7 @@ func file_kernloom_adapter_v1_adapter_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_kernloom_adapter_v1_adapter_proto_rawDesc), len(file_kernloom_adapter_v1_adapter_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   38,
+			NumMessages:   39,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

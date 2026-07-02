@@ -64,11 +64,28 @@ func TestValidateDescriptorRejectsRuntimeActionWithoutPrivilege(t *testing.T) {
 	}
 }
 
+func TestValidateDescriptorRejectsPlannedHealthFacet(t *testing.T) {
+	desc := baseDescriptor()
+	desc.FacetDescriptors[1].Status = FacetStatusPlanned
+
+	err := ValidateDescriptor(desc)
+	if err == nil {
+		t.Fatal("expected planned Health facet to be rejected")
+	}
+	if !strings.Contains(err.Error(), "Health facet as implemented") {
+		t.Fatalf("expected implemented health error, got %v", err)
+	}
+}
+
 func baseDescriptor() *AdapterDescriptor {
 	return &AdapterDescriptor{
 		AdapterId:       "test.adapter",
 		Name:            "Test Adapter",
 		ProtocolVersion: ProtocolVersion,
 		Facets:          []string{FacetDescribe, FacetHealth},
+		FacetDescriptors: []*FacetDescriptor{
+			{Name: FacetDescribe, Status: FacetStatusImplemented},
+			{Name: FacetHealth, Status: FacetStatusImplemented},
+		},
 	}
 }

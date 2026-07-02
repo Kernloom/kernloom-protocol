@@ -39,6 +39,13 @@ message AdapterDescriptor {
   repeated ContextRequirementDescriptor context_requirements = 5;
   repeated PrivilegeDescriptor privileges = 6;
   repeated string facets = 7;
+  repeated FacetDescriptor facet_descriptors = 8;
+}
+
+message FacetDescriptor {
+  string name = 1;
+  string status = 2;
+  string message = 3;
 }
 
 message CapabilityDescriptor {
