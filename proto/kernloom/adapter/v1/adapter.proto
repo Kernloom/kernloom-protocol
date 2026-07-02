@@ -1,0 +1,228 @@
+// SPDX-License-Identifier: MPL-2.0
+// Copyright (c) 2026 Kernloom Contributors
+
+syntax = "proto3";
+
+package kernloom.adapter.v1;
+
+option go_package = "github.com/kernloom/kernloom-protocol/sdk/go/adapter/v1;adapterv1";
+
+service AdapterService {
+  rpc Describe(DescribeRequest) returns (DescribeResponse);
+  rpc Health(HealthRequest) returns (HealthResponse);
+
+  rpc PlanConfig(PlanConfigRequest) returns (PlanConfigResponse);
+  rpc ValidateConfig(ValidateConfigRequest) returns (ValidateConfigResponse);
+  rpc ReadObservedState(ReadObservedStateRequest) returns (ReadObservedStateResponse);
+  rpc NormalizeState(NormalizeStateRequest) returns (NormalizeStateResponse);
+  rpc ProvideConformanceEvidence(ProvideConformanceEvidenceRequest) returns (ProvideConformanceEvidenceResponse);
+  rpc ReadSignals(ReadSignalsRequest) returns (ReadSignalsResponse);
+  rpc StreamSignals(StreamSignalsRequest) returns (stream StreamSignalsResponse);
+  rpc ProvideRelationships(ProvideRelationshipsRequest) returns (ProvideRelationshipsResponse);
+  rpc ExecuteRuntimeAction(ExecuteRuntimeActionRequest) returns (ExecuteRuntimeActionResponse);
+  rpc GetRuntimeActionState(GetRuntimeActionStateRequest) returns (GetRuntimeActionStateResponse);
+  rpc RevokeRuntimeAction(RevokeRuntimeActionRequest) returns (RevokeRuntimeActionResponse);
+  rpc ProvideAttestationEvidence(ProvideAttestationEvidenceRequest) returns (ProvideAttestationEvidenceResponse);
+}
+
+message DescribeRequest {}
+
+message DescribeResponse {
+  AdapterDescriptor adapter = 1;
+}
+
+message AdapterDescriptor {
+  string adapter_id = 1;
+  string name = 2;
+  string protocol_version = 3;
+  repeated CapabilityDescriptor capabilities = 4;
+  repeated ContextRequirementDescriptor context_requirements = 5;
+  repeated PrivilegeDescriptor privileges = 6;
+  repeated string facets = 7;
+}
+
+message CapabilityDescriptor {
+  string id = 1;
+  string display_name = 2;
+  string kind = 3;
+  repeated string actions = 4;
+  repeated string runtime_actions = 5;
+}
+
+message ContextRequirementDescriptor {
+  string fact = 1;
+  string freshness = 2;
+  string confidence = 3;
+  string sensitivity = 4;
+}
+
+message PrivilegeDescriptor {
+  string id = 1;
+  string reason = 2;
+  string scope = 3;
+  string access = 4;
+}
+
+message HealthRequest {}
+
+message HealthResponse {
+  string status = 1;
+  string message = 2;
+}
+
+message PlanConfigRequest {
+  string policy_id = 1;
+  string source_commit = 2;
+  bytes resolved_policy = 3;
+}
+
+message PlanConfigResponse {
+  repeated ConfigChange proposed_changes = 1;
+}
+
+message ConfigChange {
+  string id = 1;
+  string target_object = 2;
+  string action = 3;
+  bytes payload = 4;
+}
+
+message ValidateConfigRequest {
+  repeated ConfigChange proposed_changes = 1;
+}
+
+message ValidateConfigResponse {
+  repeated Finding findings = 1;
+}
+
+message ReadObservedStateRequest {
+  string scope = 1;
+}
+
+message ReadObservedStateResponse {
+  repeated ObservedObject objects = 1;
+}
+
+message ObservedObject {
+  string id = 1;
+  string kind = 2;
+  bytes state = 3;
+}
+
+message NormalizeStateRequest {
+  repeated ObservedObject objects = 1;
+}
+
+message NormalizeStateResponse {
+  repeated ObservedObject normalized_objects = 1;
+}
+
+message ProvideConformanceEvidenceRequest {
+  string policy_id = 1;
+  string snapshot_id = 2;
+}
+
+message ProvideConformanceEvidenceResponse {
+  repeated Evidence evidence = 1;
+}
+
+message ReadSignalsRequest {
+  string scope = 1;
+}
+
+message ReadSignalsResponse {
+  repeated Signal signals = 1;
+}
+
+message StreamSignalsRequest {
+  string scope = 1;
+}
+
+message StreamSignalsResponse {
+  Signal signal = 1;
+}
+
+message Signal {
+  string id = 1;
+  string type = 2;
+  string source = 3;
+  string scope = 4;
+  bytes payload = 5;
+}
+
+message ProvideRelationshipsRequest {
+  string scope = 1;
+}
+
+message ProvideRelationshipsResponse {
+  repeated Relationship relationships = 1;
+}
+
+message Relationship {
+  string subject = 1;
+  string predicate = 2;
+  string object = 3;
+}
+
+message ExecuteRuntimeActionRequest {
+  string runtime_action_id = 1;
+  string idempotency_key = 2;
+  string action_type = 3;
+  string target_scope = 4;
+  string target_key = 5;
+  string ttl = 6;
+  string reason = 7;
+  string audit_id = 8;
+  string source_commit = 9;
+  string capability_grant_id = 10;
+  bytes signed_bundle = 11;
+}
+
+message ExecuteRuntimeActionResponse {
+  string status = 1;
+  repeated Evidence evidence = 2;
+}
+
+message GetRuntimeActionStateRequest {
+  string idempotency_key = 1;
+}
+
+message GetRuntimeActionStateResponse {
+  string status = 1;
+  repeated Evidence evidence = 2;
+}
+
+message RevokeRuntimeActionRequest {
+  string idempotency_key = 1;
+  string reason = 2;
+  string audit_id = 3;
+}
+
+message RevokeRuntimeActionResponse {
+  string status = 1;
+  repeated Evidence evidence = 2;
+}
+
+message ProvideAttestationEvidenceRequest {
+  string node_id = 1;
+}
+
+message ProvideAttestationEvidenceResponse {
+  repeated Evidence evidence = 1;
+}
+
+message Evidence {
+  string id = 1;
+  string type = 2;
+  string subject = 3;
+  string freshness = 4;
+  string confidence = 5;
+  bytes payload = 6;
+}
+
+message Finding {
+  string id = 1;
+  string type = 2;
+  string severity = 3;
+  string message = 4;
+}
