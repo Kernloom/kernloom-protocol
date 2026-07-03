@@ -183,6 +183,9 @@ message ExecuteRuntimeActionRequest {
   string source_commit = 9;
   string capability_grant_id = 10;
   bytes signed_bundle = 11;
+  string adapter_id = 12;
+  string capability_id = 13;
+  string correlation_id = 14;
 }
 
 message ExecuteRuntimeActionResponse {
@@ -192,6 +195,13 @@ message ExecuteRuntimeActionResponse {
 
 message GetRuntimeActionStateRequest {
   string idempotency_key = 1;
+  string action_type = 2;
+  string target_scope = 3;
+  string target_key = 4;
+  string capability_id = 5;
+  string runtime_action_id = 6;
+  string adapter_id = 7;
+  string correlation_id = 8;
 }
 
 message GetRuntimeActionStateResponse {
@@ -203,6 +213,15 @@ message RevokeRuntimeActionRequest {
   string idempotency_key = 1;
   string reason = 2;
   string audit_id = 3;
+  string runtime_action_id = 4;
+  string action_type = 5;
+  string target_scope = 6;
+  string target_key = 7;
+  string source_commit = 8;
+  string capability_grant_id = 9;
+  string capability_id = 10;
+  string adapter_id = 11;
+  string correlation_id = 12;
 }
 
 message RevokeRuntimeActionResponse {

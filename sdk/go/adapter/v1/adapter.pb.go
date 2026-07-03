@@ -1569,6 +1569,9 @@ type ExecuteRuntimeActionRequest struct {
 	SourceCommit      string                 `protobuf:"bytes,9,opt,name=source_commit,json=sourceCommit,proto3" json:"source_commit,omitempty"`
 	CapabilityGrantId string                 `protobuf:"bytes,10,opt,name=capability_grant_id,json=capabilityGrantId,proto3" json:"capability_grant_id,omitempty"`
 	SignedBundle      []byte                 `protobuf:"bytes,11,opt,name=signed_bundle,json=signedBundle,proto3" json:"signed_bundle,omitempty"`
+	AdapterId         string                 `protobuf:"bytes,12,opt,name=adapter_id,json=adapterId,proto3" json:"adapter_id,omitempty"`
+	CapabilityId      string                 `protobuf:"bytes,13,opt,name=capability_id,json=capabilityId,proto3" json:"capability_id,omitempty"`
+	CorrelationId     string                 `protobuf:"bytes,14,opt,name=correlation_id,json=correlationId,proto3" json:"correlation_id,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -1680,6 +1683,27 @@ func (x *ExecuteRuntimeActionRequest) GetSignedBundle() []byte {
 	return nil
 }
 
+func (x *ExecuteRuntimeActionRequest) GetAdapterId() string {
+	if x != nil {
+		return x.AdapterId
+	}
+	return ""
+}
+
+func (x *ExecuteRuntimeActionRequest) GetCapabilityId() string {
+	if x != nil {
+		return x.CapabilityId
+	}
+	return ""
+}
+
+func (x *ExecuteRuntimeActionRequest) GetCorrelationId() string {
+	if x != nil {
+		return x.CorrelationId
+	}
+	return ""
+}
+
 type ExecuteRuntimeActionResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Status        string                 `protobuf:"bytes,1,opt,name=status,proto3" json:"status,omitempty"`
@@ -1733,10 +1757,17 @@ func (x *ExecuteRuntimeActionResponse) GetEvidence() []*Evidence {
 }
 
 type GetRuntimeActionStateRequest struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	IdempotencyKey string                 `protobuf:"bytes,1,opt,name=idempotency_key,json=idempotencyKey,proto3" json:"idempotency_key,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	IdempotencyKey  string                 `protobuf:"bytes,1,opt,name=idempotency_key,json=idempotencyKey,proto3" json:"idempotency_key,omitempty"`
+	ActionType      string                 `protobuf:"bytes,2,opt,name=action_type,json=actionType,proto3" json:"action_type,omitempty"`
+	TargetScope     string                 `protobuf:"bytes,3,opt,name=target_scope,json=targetScope,proto3" json:"target_scope,omitempty"`
+	TargetKey       string                 `protobuf:"bytes,4,opt,name=target_key,json=targetKey,proto3" json:"target_key,omitempty"`
+	CapabilityId    string                 `protobuf:"bytes,5,opt,name=capability_id,json=capabilityId,proto3" json:"capability_id,omitempty"`
+	RuntimeActionId string                 `protobuf:"bytes,6,opt,name=runtime_action_id,json=runtimeActionId,proto3" json:"runtime_action_id,omitempty"`
+	AdapterId       string                 `protobuf:"bytes,7,opt,name=adapter_id,json=adapterId,proto3" json:"adapter_id,omitempty"`
+	CorrelationId   string                 `protobuf:"bytes,8,opt,name=correlation_id,json=correlationId,proto3" json:"correlation_id,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *GetRuntimeActionStateRequest) Reset() {
@@ -1772,6 +1803,55 @@ func (*GetRuntimeActionStateRequest) Descriptor() ([]byte, []int) {
 func (x *GetRuntimeActionStateRequest) GetIdempotencyKey() string {
 	if x != nil {
 		return x.IdempotencyKey
+	}
+	return ""
+}
+
+func (x *GetRuntimeActionStateRequest) GetActionType() string {
+	if x != nil {
+		return x.ActionType
+	}
+	return ""
+}
+
+func (x *GetRuntimeActionStateRequest) GetTargetScope() string {
+	if x != nil {
+		return x.TargetScope
+	}
+	return ""
+}
+
+func (x *GetRuntimeActionStateRequest) GetTargetKey() string {
+	if x != nil {
+		return x.TargetKey
+	}
+	return ""
+}
+
+func (x *GetRuntimeActionStateRequest) GetCapabilityId() string {
+	if x != nil {
+		return x.CapabilityId
+	}
+	return ""
+}
+
+func (x *GetRuntimeActionStateRequest) GetRuntimeActionId() string {
+	if x != nil {
+		return x.RuntimeActionId
+	}
+	return ""
+}
+
+func (x *GetRuntimeActionStateRequest) GetAdapterId() string {
+	if x != nil {
+		return x.AdapterId
+	}
+	return ""
+}
+
+func (x *GetRuntimeActionStateRequest) GetCorrelationId() string {
+	if x != nil {
+		return x.CorrelationId
 	}
 	return ""
 }
@@ -1829,12 +1909,21 @@ func (x *GetRuntimeActionStateResponse) GetEvidence() []*Evidence {
 }
 
 type RevokeRuntimeActionRequest struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	IdempotencyKey string                 `protobuf:"bytes,1,opt,name=idempotency_key,json=idempotencyKey,proto3" json:"idempotency_key,omitempty"`
-	Reason         string                 `protobuf:"bytes,2,opt,name=reason,proto3" json:"reason,omitempty"`
-	AuditId        string                 `protobuf:"bytes,3,opt,name=audit_id,json=auditId,proto3" json:"audit_id,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	IdempotencyKey    string                 `protobuf:"bytes,1,opt,name=idempotency_key,json=idempotencyKey,proto3" json:"idempotency_key,omitempty"`
+	Reason            string                 `protobuf:"bytes,2,opt,name=reason,proto3" json:"reason,omitempty"`
+	AuditId           string                 `protobuf:"bytes,3,opt,name=audit_id,json=auditId,proto3" json:"audit_id,omitempty"`
+	RuntimeActionId   string                 `protobuf:"bytes,4,opt,name=runtime_action_id,json=runtimeActionId,proto3" json:"runtime_action_id,omitempty"`
+	ActionType        string                 `protobuf:"bytes,5,opt,name=action_type,json=actionType,proto3" json:"action_type,omitempty"`
+	TargetScope       string                 `protobuf:"bytes,6,opt,name=target_scope,json=targetScope,proto3" json:"target_scope,omitempty"`
+	TargetKey         string                 `protobuf:"bytes,7,opt,name=target_key,json=targetKey,proto3" json:"target_key,omitempty"`
+	SourceCommit      string                 `protobuf:"bytes,8,opt,name=source_commit,json=sourceCommit,proto3" json:"source_commit,omitempty"`
+	CapabilityGrantId string                 `protobuf:"bytes,9,opt,name=capability_grant_id,json=capabilityGrantId,proto3" json:"capability_grant_id,omitempty"`
+	CapabilityId      string                 `protobuf:"bytes,10,opt,name=capability_id,json=capabilityId,proto3" json:"capability_id,omitempty"`
+	AdapterId         string                 `protobuf:"bytes,11,opt,name=adapter_id,json=adapterId,proto3" json:"adapter_id,omitempty"`
+	CorrelationId     string                 `protobuf:"bytes,12,opt,name=correlation_id,json=correlationId,proto3" json:"correlation_id,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *RevokeRuntimeActionRequest) Reset() {
@@ -1884,6 +1973,69 @@ func (x *RevokeRuntimeActionRequest) GetReason() string {
 func (x *RevokeRuntimeActionRequest) GetAuditId() string {
 	if x != nil {
 		return x.AuditId
+	}
+	return ""
+}
+
+func (x *RevokeRuntimeActionRequest) GetRuntimeActionId() string {
+	if x != nil {
+		return x.RuntimeActionId
+	}
+	return ""
+}
+
+func (x *RevokeRuntimeActionRequest) GetActionType() string {
+	if x != nil {
+		return x.ActionType
+	}
+	return ""
+}
+
+func (x *RevokeRuntimeActionRequest) GetTargetScope() string {
+	if x != nil {
+		return x.TargetScope
+	}
+	return ""
+}
+
+func (x *RevokeRuntimeActionRequest) GetTargetKey() string {
+	if x != nil {
+		return x.TargetKey
+	}
+	return ""
+}
+
+func (x *RevokeRuntimeActionRequest) GetSourceCommit() string {
+	if x != nil {
+		return x.SourceCommit
+	}
+	return ""
+}
+
+func (x *RevokeRuntimeActionRequest) GetCapabilityGrantId() string {
+	if x != nil {
+		return x.CapabilityGrantId
+	}
+	return ""
+}
+
+func (x *RevokeRuntimeActionRequest) GetCapabilityId() string {
+	if x != nil {
+		return x.CapabilityId
+	}
+	return ""
+}
+
+func (x *RevokeRuntimeActionRequest) GetAdapterId() string {
+	if x != nil {
+		return x.AdapterId
+	}
+	return ""
+}
+
+func (x *RevokeRuntimeActionRequest) GetCorrelationId() string {
+	if x != nil {
+		return x.CorrelationId
 	}
 	return ""
 }
@@ -2280,7 +2432,7 @@ const file_kernloom_adapter_v1_adapter_proto_rawDesc = "" +
 	"\fRelationship\x12\x18\n" +
 	"\asubject\x18\x01 \x01(\tR\asubject\x12\x1c\n" +
 	"\tpredicate\x18\x02 \x01(\tR\tpredicate\x12\x16\n" +
-	"\x06object\x18\x03 \x01(\tR\x06object\"\x94\x03\n" +
+	"\x06object\x18\x03 \x01(\tR\x06object\"\xff\x03\n" +
 	"\x1bExecuteRuntimeActionRequest\x12*\n" +
 	"\x11runtime_action_id\x18\x01 \x01(\tR\x0fruntimeActionId\x12'\n" +
 	"\x0fidempotency_key\x18\x02 \x01(\tR\x0eidempotencyKey\x12\x1f\n" +
@@ -2295,19 +2447,46 @@ const file_kernloom_adapter_v1_adapter_proto_rawDesc = "" +
 	"\rsource_commit\x18\t \x01(\tR\fsourceCommit\x12.\n" +
 	"\x13capability_grant_id\x18\n" +
 	" \x01(\tR\x11capabilityGrantId\x12#\n" +
-	"\rsigned_bundle\x18\v \x01(\fR\fsignedBundle\"q\n" +
+	"\rsigned_bundle\x18\v \x01(\fR\fsignedBundle\x12\x1d\n" +
+	"\n" +
+	"adapter_id\x18\f \x01(\tR\tadapterId\x12#\n" +
+	"\rcapability_id\x18\r \x01(\tR\fcapabilityId\x12%\n" +
+	"\x0ecorrelation_id\x18\x0e \x01(\tR\rcorrelationId\"q\n" +
 	"\x1cExecuteRuntimeActionResponse\x12\x16\n" +
 	"\x06status\x18\x01 \x01(\tR\x06status\x129\n" +
-	"\bevidence\x18\x02 \x03(\v2\x1d.kernloom.adapter.v1.EvidenceR\bevidence\"G\n" +
+	"\bevidence\x18\x02 \x03(\v2\x1d.kernloom.adapter.v1.EvidenceR\bevidence\"\xc1\x02\n" +
 	"\x1cGetRuntimeActionStateRequest\x12'\n" +
-	"\x0fidempotency_key\x18\x01 \x01(\tR\x0eidempotencyKey\"r\n" +
+	"\x0fidempotency_key\x18\x01 \x01(\tR\x0eidempotencyKey\x12\x1f\n" +
+	"\vaction_type\x18\x02 \x01(\tR\n" +
+	"actionType\x12!\n" +
+	"\ftarget_scope\x18\x03 \x01(\tR\vtargetScope\x12\x1d\n" +
+	"\n" +
+	"target_key\x18\x04 \x01(\tR\ttargetKey\x12#\n" +
+	"\rcapability_id\x18\x05 \x01(\tR\fcapabilityId\x12*\n" +
+	"\x11runtime_action_id\x18\x06 \x01(\tR\x0fruntimeActionId\x12\x1d\n" +
+	"\n" +
+	"adapter_id\x18\a \x01(\tR\tadapterId\x12%\n" +
+	"\x0ecorrelation_id\x18\b \x01(\tR\rcorrelationId\"r\n" +
 	"\x1dGetRuntimeActionStateResponse\x12\x16\n" +
 	"\x06status\x18\x01 \x01(\tR\x06status\x129\n" +
-	"\bevidence\x18\x02 \x03(\v2\x1d.kernloom.adapter.v1.EvidenceR\bevidence\"x\n" +
+	"\bevidence\x18\x02 \x03(\v2\x1d.kernloom.adapter.v1.EvidenceR\bevidence\"\xc7\x03\n" +
 	"\x1aRevokeRuntimeActionRequest\x12'\n" +
 	"\x0fidempotency_key\x18\x01 \x01(\tR\x0eidempotencyKey\x12\x16\n" +
 	"\x06reason\x18\x02 \x01(\tR\x06reason\x12\x19\n" +
-	"\baudit_id\x18\x03 \x01(\tR\aauditId\"p\n" +
+	"\baudit_id\x18\x03 \x01(\tR\aauditId\x12*\n" +
+	"\x11runtime_action_id\x18\x04 \x01(\tR\x0fruntimeActionId\x12\x1f\n" +
+	"\vaction_type\x18\x05 \x01(\tR\n" +
+	"actionType\x12!\n" +
+	"\ftarget_scope\x18\x06 \x01(\tR\vtargetScope\x12\x1d\n" +
+	"\n" +
+	"target_key\x18\a \x01(\tR\ttargetKey\x12#\n" +
+	"\rsource_commit\x18\b \x01(\tR\fsourceCommit\x12.\n" +
+	"\x13capability_grant_id\x18\t \x01(\tR\x11capabilityGrantId\x12#\n" +
+	"\rcapability_id\x18\n" +
+	" \x01(\tR\fcapabilityId\x12\x1d\n" +
+	"\n" +
+	"adapter_id\x18\v \x01(\tR\tadapterId\x12%\n" +
+	"\x0ecorrelation_id\x18\f \x01(\tR\rcorrelationId\"p\n" +
 	"\x1bRevokeRuntimeActionResponse\x12\x16\n" +
 	"\x06status\x18\x01 \x01(\tR\x06status\x129\n" +
 	"\bevidence\x18\x02 \x03(\v2\x1d.kernloom.adapter.v1.EvidenceR\bevidence\"<\n" +
