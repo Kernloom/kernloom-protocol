@@ -1,0 +1,39 @@
+name: release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  build-sign-sbom:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.26"
+      - uses: sigstore/cosign-installer@v3
+      - run: go install github.com/bufbuild/buf/cmd/buf@v1.71.0
+      - run: go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.36.11
+      - run: go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.6.2
+      - run: make generate
+      - run: git diff --exit-code
+      - run: mkdir -p dist
+      - run: tar --sort=name --owner=0 --group=0 --numeric-owner -czf dist/kernloom-protocol-artifacts.tar.gz proto sdk contract
+      - run: sha256sum dist/kernloom-protocol-artifacts.tar.gz > dist/checksums.txt
+      - uses: anchore/sbom-action@v0
+        with:
+          path: .
+          format: spdx-json
+          output-file: dist/kernloom-protocol.spdx.json
+      - run: cosign sign-blob --yes --output-signature dist/checksums.txt.sig --output-certificate dist/checksums.txt.pem dist/checksums.txt
+      - run: cosign sign-blob --yes --output-signature dist/kernloom-protocol.spdx.json.sig --output-certificate dist/kernloom-protocol.spdx.json.pem dist/kernloom-protocol.spdx.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kernloom-protocol-release-artifacts
+          path: dist/
