@@ -40,6 +40,7 @@ message AdapterDescriptor {
   repeated PrivilegeDescriptor privileges = 6;
   repeated string facets = 7;
   repeated FacetDescriptor facet_descriptors = 8;
+  string manifest_digest = 9;
 }
 
 message FacetDescriptor {
@@ -186,6 +187,10 @@ message ExecuteRuntimeActionRequest {
   string adapter_id = 12;
   string capability_id = 13;
   string correlation_id = 14;
+  string binding_id = 15;
+  string binding_digest = 16;
+  string adapter_manifest_digest = 17;
+  string action_digest = 18;
 }
 
 message ExecuteRuntimeActionResponse {
@@ -202,6 +207,10 @@ message GetRuntimeActionStateRequest {
   string runtime_action_id = 6;
   string adapter_id = 7;
   string correlation_id = 8;
+  string binding_id = 9;
+  string binding_digest = 10;
+  string adapter_manifest_digest = 11;
+  string action_digest = 12;
 }
 
 message GetRuntimeActionStateResponse {
@@ -222,6 +231,10 @@ message RevokeRuntimeActionRequest {
   string capability_id = 10;
   string adapter_id = 11;
   string correlation_id = 12;
+  string binding_id = 13;
+  string binding_digest = 14;
+  string adapter_manifest_digest = 15;
+  string action_digest = 16;
 }
 
 message RevokeRuntimeActionResponse {

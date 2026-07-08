@@ -114,6 +114,7 @@ type AdapterDescriptor struct {
 	Privileges          []*PrivilegeDescriptor          `protobuf:"bytes,6,rep,name=privileges,proto3" json:"privileges,omitempty"`
 	Facets              []string                        `protobuf:"bytes,7,rep,name=facets,proto3" json:"facets,omitempty"`
 	FacetDescriptors    []*FacetDescriptor              `protobuf:"bytes,8,rep,name=facet_descriptors,json=facetDescriptors,proto3" json:"facet_descriptors,omitempty"`
+	ManifestDigest      string                          `protobuf:"bytes,9,opt,name=manifest_digest,json=manifestDigest,proto3" json:"manifest_digest,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -202,6 +203,13 @@ func (x *AdapterDescriptor) GetFacetDescriptors() []*FacetDescriptor {
 		return x.FacetDescriptors
 	}
 	return nil
+}
+
+func (x *AdapterDescriptor) GetManifestDigest() string {
+	if x != nil {
+		return x.ManifestDigest
+	}
+	return ""
 }
 
 type FacetDescriptor struct {
@@ -1557,23 +1565,27 @@ func (x *Relationship) GetObject() string {
 }
 
 type ExecuteRuntimeActionRequest struct {
-	state             protoimpl.MessageState `protogen:"open.v1"`
-	RuntimeActionId   string                 `protobuf:"bytes,1,opt,name=runtime_action_id,json=runtimeActionId,proto3" json:"runtime_action_id,omitempty"`
-	IdempotencyKey    string                 `protobuf:"bytes,2,opt,name=idempotency_key,json=idempotencyKey,proto3" json:"idempotency_key,omitempty"`
-	ActionType        string                 `protobuf:"bytes,3,opt,name=action_type,json=actionType,proto3" json:"action_type,omitempty"`
-	TargetScope       string                 `protobuf:"bytes,4,opt,name=target_scope,json=targetScope,proto3" json:"target_scope,omitempty"`
-	TargetKey         string                 `protobuf:"bytes,5,opt,name=target_key,json=targetKey,proto3" json:"target_key,omitempty"`
-	Ttl               string                 `protobuf:"bytes,6,opt,name=ttl,proto3" json:"ttl,omitempty"`
-	Reason            string                 `protobuf:"bytes,7,opt,name=reason,proto3" json:"reason,omitempty"`
-	AuditId           string                 `protobuf:"bytes,8,opt,name=audit_id,json=auditId,proto3" json:"audit_id,omitempty"`
-	SourceCommit      string                 `protobuf:"bytes,9,opt,name=source_commit,json=sourceCommit,proto3" json:"source_commit,omitempty"`
-	CapabilityGrantId string                 `protobuf:"bytes,10,opt,name=capability_grant_id,json=capabilityGrantId,proto3" json:"capability_grant_id,omitempty"`
-	SignedBundle      []byte                 `protobuf:"bytes,11,opt,name=signed_bundle,json=signedBundle,proto3" json:"signed_bundle,omitempty"`
-	AdapterId         string                 `protobuf:"bytes,12,opt,name=adapter_id,json=adapterId,proto3" json:"adapter_id,omitempty"`
-	CapabilityId      string                 `protobuf:"bytes,13,opt,name=capability_id,json=capabilityId,proto3" json:"capability_id,omitempty"`
-	CorrelationId     string                 `protobuf:"bytes,14,opt,name=correlation_id,json=correlationId,proto3" json:"correlation_id,omitempty"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
+	state                 protoimpl.MessageState `protogen:"open.v1"`
+	RuntimeActionId       string                 `protobuf:"bytes,1,opt,name=runtime_action_id,json=runtimeActionId,proto3" json:"runtime_action_id,omitempty"`
+	IdempotencyKey        string                 `protobuf:"bytes,2,opt,name=idempotency_key,json=idempotencyKey,proto3" json:"idempotency_key,omitempty"`
+	ActionType            string                 `protobuf:"bytes,3,opt,name=action_type,json=actionType,proto3" json:"action_type,omitempty"`
+	TargetScope           string                 `protobuf:"bytes,4,opt,name=target_scope,json=targetScope,proto3" json:"target_scope,omitempty"`
+	TargetKey             string                 `protobuf:"bytes,5,opt,name=target_key,json=targetKey,proto3" json:"target_key,omitempty"`
+	Ttl                   string                 `protobuf:"bytes,6,opt,name=ttl,proto3" json:"ttl,omitempty"`
+	Reason                string                 `protobuf:"bytes,7,opt,name=reason,proto3" json:"reason,omitempty"`
+	AuditId               string                 `protobuf:"bytes,8,opt,name=audit_id,json=auditId,proto3" json:"audit_id,omitempty"`
+	SourceCommit          string                 `protobuf:"bytes,9,opt,name=source_commit,json=sourceCommit,proto3" json:"source_commit,omitempty"`
+	CapabilityGrantId     string                 `protobuf:"bytes,10,opt,name=capability_grant_id,json=capabilityGrantId,proto3" json:"capability_grant_id,omitempty"`
+	SignedBundle          []byte                 `protobuf:"bytes,11,opt,name=signed_bundle,json=signedBundle,proto3" json:"signed_bundle,omitempty"`
+	AdapterId             string                 `protobuf:"bytes,12,opt,name=adapter_id,json=adapterId,proto3" json:"adapter_id,omitempty"`
+	CapabilityId          string                 `protobuf:"bytes,13,opt,name=capability_id,json=capabilityId,proto3" json:"capability_id,omitempty"`
+	CorrelationId         string                 `protobuf:"bytes,14,opt,name=correlation_id,json=correlationId,proto3" json:"correlation_id,omitempty"`
+	BindingId             string                 `protobuf:"bytes,15,opt,name=binding_id,json=bindingId,proto3" json:"binding_id,omitempty"`
+	BindingDigest         string                 `protobuf:"bytes,16,opt,name=binding_digest,json=bindingDigest,proto3" json:"binding_digest,omitempty"`
+	AdapterManifestDigest string                 `protobuf:"bytes,17,opt,name=adapter_manifest_digest,json=adapterManifestDigest,proto3" json:"adapter_manifest_digest,omitempty"`
+	ActionDigest          string                 `protobuf:"bytes,18,opt,name=action_digest,json=actionDigest,proto3" json:"action_digest,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *ExecuteRuntimeActionRequest) Reset() {
@@ -1704,6 +1716,34 @@ func (x *ExecuteRuntimeActionRequest) GetCorrelationId() string {
 	return ""
 }
 
+func (x *ExecuteRuntimeActionRequest) GetBindingId() string {
+	if x != nil {
+		return x.BindingId
+	}
+	return ""
+}
+
+func (x *ExecuteRuntimeActionRequest) GetBindingDigest() string {
+	if x != nil {
+		return x.BindingDigest
+	}
+	return ""
+}
+
+func (x *ExecuteRuntimeActionRequest) GetAdapterManifestDigest() string {
+	if x != nil {
+		return x.AdapterManifestDigest
+	}
+	return ""
+}
+
+func (x *ExecuteRuntimeActionRequest) GetActionDigest() string {
+	if x != nil {
+		return x.ActionDigest
+	}
+	return ""
+}
+
 type ExecuteRuntimeActionResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Status        string                 `protobuf:"bytes,1,opt,name=status,proto3" json:"status,omitempty"`
@@ -1757,17 +1797,21 @@ func (x *ExecuteRuntimeActionResponse) GetEvidence() []*Evidence {
 }
 
 type GetRuntimeActionStateRequest struct {
-	state           protoimpl.MessageState `protogen:"open.v1"`
-	IdempotencyKey  string                 `protobuf:"bytes,1,opt,name=idempotency_key,json=idempotencyKey,proto3" json:"idempotency_key,omitempty"`
-	ActionType      string                 `protobuf:"bytes,2,opt,name=action_type,json=actionType,proto3" json:"action_type,omitempty"`
-	TargetScope     string                 `protobuf:"bytes,3,opt,name=target_scope,json=targetScope,proto3" json:"target_scope,omitempty"`
-	TargetKey       string                 `protobuf:"bytes,4,opt,name=target_key,json=targetKey,proto3" json:"target_key,omitempty"`
-	CapabilityId    string                 `protobuf:"bytes,5,opt,name=capability_id,json=capabilityId,proto3" json:"capability_id,omitempty"`
-	RuntimeActionId string                 `protobuf:"bytes,6,opt,name=runtime_action_id,json=runtimeActionId,proto3" json:"runtime_action_id,omitempty"`
-	AdapterId       string                 `protobuf:"bytes,7,opt,name=adapter_id,json=adapterId,proto3" json:"adapter_id,omitempty"`
-	CorrelationId   string                 `protobuf:"bytes,8,opt,name=correlation_id,json=correlationId,proto3" json:"correlation_id,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                 protoimpl.MessageState `protogen:"open.v1"`
+	IdempotencyKey        string                 `protobuf:"bytes,1,opt,name=idempotency_key,json=idempotencyKey,proto3" json:"idempotency_key,omitempty"`
+	ActionType            string                 `protobuf:"bytes,2,opt,name=action_type,json=actionType,proto3" json:"action_type,omitempty"`
+	TargetScope           string                 `protobuf:"bytes,3,opt,name=target_scope,json=targetScope,proto3" json:"target_scope,omitempty"`
+	TargetKey             string                 `protobuf:"bytes,4,opt,name=target_key,json=targetKey,proto3" json:"target_key,omitempty"`
+	CapabilityId          string                 `protobuf:"bytes,5,opt,name=capability_id,json=capabilityId,proto3" json:"capability_id,omitempty"`
+	RuntimeActionId       string                 `protobuf:"bytes,6,opt,name=runtime_action_id,json=runtimeActionId,proto3" json:"runtime_action_id,omitempty"`
+	AdapterId             string                 `protobuf:"bytes,7,opt,name=adapter_id,json=adapterId,proto3" json:"adapter_id,omitempty"`
+	CorrelationId         string                 `protobuf:"bytes,8,opt,name=correlation_id,json=correlationId,proto3" json:"correlation_id,omitempty"`
+	BindingId             string                 `protobuf:"bytes,9,opt,name=binding_id,json=bindingId,proto3" json:"binding_id,omitempty"`
+	BindingDigest         string                 `protobuf:"bytes,10,opt,name=binding_digest,json=bindingDigest,proto3" json:"binding_digest,omitempty"`
+	AdapterManifestDigest string                 `protobuf:"bytes,11,opt,name=adapter_manifest_digest,json=adapterManifestDigest,proto3" json:"adapter_manifest_digest,omitempty"`
+	ActionDigest          string                 `protobuf:"bytes,12,opt,name=action_digest,json=actionDigest,proto3" json:"action_digest,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *GetRuntimeActionStateRequest) Reset() {
@@ -1856,6 +1900,34 @@ func (x *GetRuntimeActionStateRequest) GetCorrelationId() string {
 	return ""
 }
 
+func (x *GetRuntimeActionStateRequest) GetBindingId() string {
+	if x != nil {
+		return x.BindingId
+	}
+	return ""
+}
+
+func (x *GetRuntimeActionStateRequest) GetBindingDigest() string {
+	if x != nil {
+		return x.BindingDigest
+	}
+	return ""
+}
+
+func (x *GetRuntimeActionStateRequest) GetAdapterManifestDigest() string {
+	if x != nil {
+		return x.AdapterManifestDigest
+	}
+	return ""
+}
+
+func (x *GetRuntimeActionStateRequest) GetActionDigest() string {
+	if x != nil {
+		return x.ActionDigest
+	}
+	return ""
+}
+
 type GetRuntimeActionStateResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Status        string                 `protobuf:"bytes,1,opt,name=status,proto3" json:"status,omitempty"`
@@ -1909,21 +1981,25 @@ func (x *GetRuntimeActionStateResponse) GetEvidence() []*Evidence {
 }
 
 type RevokeRuntimeActionRequest struct {
-	state             protoimpl.MessageState `protogen:"open.v1"`
-	IdempotencyKey    string                 `protobuf:"bytes,1,opt,name=idempotency_key,json=idempotencyKey,proto3" json:"idempotency_key,omitempty"`
-	Reason            string                 `protobuf:"bytes,2,opt,name=reason,proto3" json:"reason,omitempty"`
-	AuditId           string                 `protobuf:"bytes,3,opt,name=audit_id,json=auditId,proto3" json:"audit_id,omitempty"`
-	RuntimeActionId   string                 `protobuf:"bytes,4,opt,name=runtime_action_id,json=runtimeActionId,proto3" json:"runtime_action_id,omitempty"`
-	ActionType        string                 `protobuf:"bytes,5,opt,name=action_type,json=actionType,proto3" json:"action_type,omitempty"`
-	TargetScope       string                 `protobuf:"bytes,6,opt,name=target_scope,json=targetScope,proto3" json:"target_scope,omitempty"`
-	TargetKey         string                 `protobuf:"bytes,7,opt,name=target_key,json=targetKey,proto3" json:"target_key,omitempty"`
-	SourceCommit      string                 `protobuf:"bytes,8,opt,name=source_commit,json=sourceCommit,proto3" json:"source_commit,omitempty"`
-	CapabilityGrantId string                 `protobuf:"bytes,9,opt,name=capability_grant_id,json=capabilityGrantId,proto3" json:"capability_grant_id,omitempty"`
-	CapabilityId      string                 `protobuf:"bytes,10,opt,name=capability_id,json=capabilityId,proto3" json:"capability_id,omitempty"`
-	AdapterId         string                 `protobuf:"bytes,11,opt,name=adapter_id,json=adapterId,proto3" json:"adapter_id,omitempty"`
-	CorrelationId     string                 `protobuf:"bytes,12,opt,name=correlation_id,json=correlationId,proto3" json:"correlation_id,omitempty"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
+	state                 protoimpl.MessageState `protogen:"open.v1"`
+	IdempotencyKey        string                 `protobuf:"bytes,1,opt,name=idempotency_key,json=idempotencyKey,proto3" json:"idempotency_key,omitempty"`
+	Reason                string                 `protobuf:"bytes,2,opt,name=reason,proto3" json:"reason,omitempty"`
+	AuditId               string                 `protobuf:"bytes,3,opt,name=audit_id,json=auditId,proto3" json:"audit_id,omitempty"`
+	RuntimeActionId       string                 `protobuf:"bytes,4,opt,name=runtime_action_id,json=runtimeActionId,proto3" json:"runtime_action_id,omitempty"`
+	ActionType            string                 `protobuf:"bytes,5,opt,name=action_type,json=actionType,proto3" json:"action_type,omitempty"`
+	TargetScope           string                 `protobuf:"bytes,6,opt,name=target_scope,json=targetScope,proto3" json:"target_scope,omitempty"`
+	TargetKey             string                 `protobuf:"bytes,7,opt,name=target_key,json=targetKey,proto3" json:"target_key,omitempty"`
+	SourceCommit          string                 `protobuf:"bytes,8,opt,name=source_commit,json=sourceCommit,proto3" json:"source_commit,omitempty"`
+	CapabilityGrantId     string                 `protobuf:"bytes,9,opt,name=capability_grant_id,json=capabilityGrantId,proto3" json:"capability_grant_id,omitempty"`
+	CapabilityId          string                 `protobuf:"bytes,10,opt,name=capability_id,json=capabilityId,proto3" json:"capability_id,omitempty"`
+	AdapterId             string                 `protobuf:"bytes,11,opt,name=adapter_id,json=adapterId,proto3" json:"adapter_id,omitempty"`
+	CorrelationId         string                 `protobuf:"bytes,12,opt,name=correlation_id,json=correlationId,proto3" json:"correlation_id,omitempty"`
+	BindingId             string                 `protobuf:"bytes,13,opt,name=binding_id,json=bindingId,proto3" json:"binding_id,omitempty"`
+	BindingDigest         string                 `protobuf:"bytes,14,opt,name=binding_digest,json=bindingDigest,proto3" json:"binding_digest,omitempty"`
+	AdapterManifestDigest string                 `protobuf:"bytes,15,opt,name=adapter_manifest_digest,json=adapterManifestDigest,proto3" json:"adapter_manifest_digest,omitempty"`
+	ActionDigest          string                 `protobuf:"bytes,16,opt,name=action_digest,json=actionDigest,proto3" json:"action_digest,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *RevokeRuntimeActionRequest) Reset() {
@@ -2036,6 +2112,34 @@ func (x *RevokeRuntimeActionRequest) GetAdapterId() string {
 func (x *RevokeRuntimeActionRequest) GetCorrelationId() string {
 	if x != nil {
 		return x.CorrelationId
+	}
+	return ""
+}
+
+func (x *RevokeRuntimeActionRequest) GetBindingId() string {
+	if x != nil {
+		return x.BindingId
+	}
+	return ""
+}
+
+func (x *RevokeRuntimeActionRequest) GetBindingDigest() string {
+	if x != nil {
+		return x.BindingDigest
+	}
+	return ""
+}
+
+func (x *RevokeRuntimeActionRequest) GetAdapterManifestDigest() string {
+	if x != nil {
+		return x.AdapterManifestDigest
+	}
+	return ""
+}
+
+func (x *RevokeRuntimeActionRequest) GetActionDigest() string {
+	if x != nil {
+		return x.ActionDigest
 	}
 	return ""
 }
@@ -2339,7 +2443,7 @@ const file_kernloom_adapter_v1_adapter_proto_rawDesc = "" +
 	"!kernloom/adapter/v1/adapter.proto\x12\x13kernloom.adapter.v1\"\x11\n" +
 	"\x0fDescribeRequest\"T\n" +
 	"\x10DescribeResponse\x12@\n" +
-	"\aadapter\x18\x01 \x01(\v2&.kernloom.adapter.v1.AdapterDescriptorR\aadapter\"\xdb\x03\n" +
+	"\aadapter\x18\x01 \x01(\v2&.kernloom.adapter.v1.AdapterDescriptorR\aadapter\"\x84\x04\n" +
 	"\x11AdapterDescriptor\x12\x1d\n" +
 	"\n" +
 	"adapter_id\x18\x01 \x01(\tR\tadapterId\x12\x12\n" +
@@ -2351,7 +2455,8 @@ const file_kernloom_adapter_v1_adapter_proto_rawDesc = "" +
 	"privileges\x18\x06 \x03(\v2(.kernloom.adapter.v1.PrivilegeDescriptorR\n" +
 	"privileges\x12\x16\n" +
 	"\x06facets\x18\a \x03(\tR\x06facets\x12Q\n" +
-	"\x11facet_descriptors\x18\b \x03(\v2$.kernloom.adapter.v1.FacetDescriptorR\x10facetDescriptors\"W\n" +
+	"\x11facet_descriptors\x18\b \x03(\v2$.kernloom.adapter.v1.FacetDescriptorR\x10facetDescriptors\x12'\n" +
+	"\x0fmanifest_digest\x18\t \x01(\tR\x0emanifestDigest\"W\n" +
 	"\x0fFacetDescriptor\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x16\n" +
 	"\x06status\x18\x02 \x01(\tR\x06status\x12\x18\n" +
@@ -2432,7 +2537,7 @@ const file_kernloom_adapter_v1_adapter_proto_rawDesc = "" +
 	"\fRelationship\x12\x18\n" +
 	"\asubject\x18\x01 \x01(\tR\asubject\x12\x1c\n" +
 	"\tpredicate\x18\x02 \x01(\tR\tpredicate\x12\x16\n" +
-	"\x06object\x18\x03 \x01(\tR\x06object\"\xff\x03\n" +
+	"\x06object\x18\x03 \x01(\tR\x06object\"\xa2\x05\n" +
 	"\x1bExecuteRuntimeActionRequest\x12*\n" +
 	"\x11runtime_action_id\x18\x01 \x01(\tR\x0fruntimeActionId\x12'\n" +
 	"\x0fidempotency_key\x18\x02 \x01(\tR\x0eidempotencyKey\x12\x1f\n" +
@@ -2451,10 +2556,15 @@ const file_kernloom_adapter_v1_adapter_proto_rawDesc = "" +
 	"\n" +
 	"adapter_id\x18\f \x01(\tR\tadapterId\x12#\n" +
 	"\rcapability_id\x18\r \x01(\tR\fcapabilityId\x12%\n" +
-	"\x0ecorrelation_id\x18\x0e \x01(\tR\rcorrelationId\"q\n" +
+	"\x0ecorrelation_id\x18\x0e \x01(\tR\rcorrelationId\x12\x1d\n" +
+	"\n" +
+	"binding_id\x18\x0f \x01(\tR\tbindingId\x12%\n" +
+	"\x0ebinding_digest\x18\x10 \x01(\tR\rbindingDigest\x126\n" +
+	"\x17adapter_manifest_digest\x18\x11 \x01(\tR\x15adapterManifestDigest\x12#\n" +
+	"\raction_digest\x18\x12 \x01(\tR\factionDigest\"q\n" +
 	"\x1cExecuteRuntimeActionResponse\x12\x16\n" +
 	"\x06status\x18\x01 \x01(\tR\x06status\x129\n" +
-	"\bevidence\x18\x02 \x03(\v2\x1d.kernloom.adapter.v1.EvidenceR\bevidence\"\xc1\x02\n" +
+	"\bevidence\x18\x02 \x03(\v2\x1d.kernloom.adapter.v1.EvidenceR\bevidence\"\xe4\x03\n" +
 	"\x1cGetRuntimeActionStateRequest\x12'\n" +
 	"\x0fidempotency_key\x18\x01 \x01(\tR\x0eidempotencyKey\x12\x1f\n" +
 	"\vaction_type\x18\x02 \x01(\tR\n" +
@@ -2466,10 +2576,16 @@ const file_kernloom_adapter_v1_adapter_proto_rawDesc = "" +
 	"\x11runtime_action_id\x18\x06 \x01(\tR\x0fruntimeActionId\x12\x1d\n" +
 	"\n" +
 	"adapter_id\x18\a \x01(\tR\tadapterId\x12%\n" +
-	"\x0ecorrelation_id\x18\b \x01(\tR\rcorrelationId\"r\n" +
+	"\x0ecorrelation_id\x18\b \x01(\tR\rcorrelationId\x12\x1d\n" +
+	"\n" +
+	"binding_id\x18\t \x01(\tR\tbindingId\x12%\n" +
+	"\x0ebinding_digest\x18\n" +
+	" \x01(\tR\rbindingDigest\x126\n" +
+	"\x17adapter_manifest_digest\x18\v \x01(\tR\x15adapterManifestDigest\x12#\n" +
+	"\raction_digest\x18\f \x01(\tR\factionDigest\"r\n" +
 	"\x1dGetRuntimeActionStateResponse\x12\x16\n" +
 	"\x06status\x18\x01 \x01(\tR\x06status\x129\n" +
-	"\bevidence\x18\x02 \x03(\v2\x1d.kernloom.adapter.v1.EvidenceR\bevidence\"\xc7\x03\n" +
+	"\bevidence\x18\x02 \x03(\v2\x1d.kernloom.adapter.v1.EvidenceR\bevidence\"\xea\x04\n" +
 	"\x1aRevokeRuntimeActionRequest\x12'\n" +
 	"\x0fidempotency_key\x18\x01 \x01(\tR\x0eidempotencyKey\x12\x16\n" +
 	"\x06reason\x18\x02 \x01(\tR\x06reason\x12\x19\n" +
@@ -2486,7 +2602,12 @@ const file_kernloom_adapter_v1_adapter_proto_rawDesc = "" +
 	" \x01(\tR\fcapabilityId\x12\x1d\n" +
 	"\n" +
 	"adapter_id\x18\v \x01(\tR\tadapterId\x12%\n" +
-	"\x0ecorrelation_id\x18\f \x01(\tR\rcorrelationId\"p\n" +
+	"\x0ecorrelation_id\x18\f \x01(\tR\rcorrelationId\x12\x1d\n" +
+	"\n" +
+	"binding_id\x18\r \x01(\tR\tbindingId\x12%\n" +
+	"\x0ebinding_digest\x18\x0e \x01(\tR\rbindingDigest\x126\n" +
+	"\x17adapter_manifest_digest\x18\x0f \x01(\tR\x15adapterManifestDigest\x12#\n" +
+	"\raction_digest\x18\x10 \x01(\tR\factionDigest\"p\n" +
 	"\x1bRevokeRuntimeActionResponse\x12\x16\n" +
 	"\x06status\x18\x01 \x01(\tR\x06status\x129\n" +
 	"\bevidence\x18\x02 \x03(\v2\x1d.kernloom.adapter.v1.EvidenceR\bevidence\"<\n" +
